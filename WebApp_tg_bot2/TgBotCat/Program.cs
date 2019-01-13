@@ -25,11 +25,11 @@ namespace cat
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
                 _Client = new TelegramBotClient("521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM");
-
                // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
+                // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
                 // new InfoService($"windows {Environment.CurrentDirectory}");
-               
-               // _Client.SetWebhookAsync("        telegrambot228.herokuapp.com/home/update");
+
+                // _Client.SetWebhookAsync("        telegrambot228.herokuapp.com/home/update");
                 Information.NameBot = "@PorterOfChatBot";
                 Information.Path = Environment.CurrentDirectory+"\\wwwroot\\" + "\\Data\\";
 
@@ -59,6 +59,7 @@ namespace cat
 
             _Client.DeleteWebhookAsync();
             _Client.SetWebhookAsync("https://telegrambot228.herokuapp.com/home/update");
+            //_Client.SetWebhookAsync("https://fb28f594.ngrok.io/home/update");
             //new InfoService($"{Environment.CurrentDirectory}");
             _Chatdata = new Chat.ChatData(_Release);
             _Chats = _Chatdata._Chats;
