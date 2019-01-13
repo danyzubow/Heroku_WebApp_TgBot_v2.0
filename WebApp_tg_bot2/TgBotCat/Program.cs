@@ -21,6 +21,7 @@ namespace cat
 
         public static async void Initialization(string arg)
         {
+            if (_Client == null) return;
             Information.DataFileXml_Name = "Saves.xml";
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
@@ -34,7 +35,8 @@ namespace cat
                 Information.Path = Environment.CurrentDirectory+"\\wwwroot\\" + "\\Data\\";
 
                 _Release = false;
-
+                _Client.DeleteWebhookAsync();
+                _Client.SetWebhookAsync("https://fb28f594.ngrok.io/home/update");
                 //_Client.OnInlineQuery += Client_OnInlineQuery;
                 //  _Client.OnUpdate += Client_OnUpdate;
                 //
@@ -55,10 +57,11 @@ namespace cat
                 _Release = false;
                 System.IO.File.Copy($"{Environment.CurrentDirectory}/wwwroot/Data/ftpcontact.dll", $"{Environment.CurrentDirectory}/ftpcontact.dll");
                 ////ChatData.ChatData.DownloadSaves();
+                _Client.DeleteWebhookAsync();
+                _Client.SetWebhookAsync("https://telegrambot228.herokuapp.com/home/update");
             }
 
-            _Client.DeleteWebhookAsync();
-            _Client.SetWebhookAsync("https://telegrambot228.herokuapp.com/home/update");
+          
             //_Client.SetWebhookAsync("https://fb28f594.ngrok.io/home/update");
             //new InfoService($"{Environment.CurrentDirectory}");
             _Chatdata = new Chat.ChatData(_Release);

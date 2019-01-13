@@ -31,8 +31,10 @@ namespace WebApp_tg_bot2.Controllers
 
             return View();
         }
-        public OkResult update(Update update)
+      //  [HttpPost]
+        public OkResult update([FromBody]Update update)
         {
+            cat.Program.Initialization(null);
             TelegramBotClient _Client = new TelegramBotClient("521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM");
             _Client.SendTextMessageAsync("227950395", "hook triger", ParseMode.Html);
             switch (update.Type)
