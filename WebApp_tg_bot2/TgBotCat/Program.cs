@@ -67,7 +67,7 @@ namespace cat
             _Chatdata = new Chat.ChatData(_Release);
             _Chats = _Chatdata._Chats;
 
-            new InfoService("Time(+3) = " + DateTime.Now.AddHours(3).ToString("G"));
+            new InfoService("[Start Bot]");
 
             _Client.OnCallbackQuery += Client_OnCallbackQuery;
             _Client.OnMessage += Client_OnMessage;
