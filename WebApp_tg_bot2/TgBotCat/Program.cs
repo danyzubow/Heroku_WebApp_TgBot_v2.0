@@ -21,7 +21,7 @@ namespace cat
 
         public static async void Initialization(string arg)
         {
-            if (_Client == null) return;
+            if (_Client != null) return;
             Information.DataFileXml_Name = "Saves.xml";
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
@@ -36,7 +36,7 @@ namespace cat
 
                 _Release = false;
                 _Client.DeleteWebhookAsync();
-                _Client.SetWebhookAsync("https://fb28f594.ngrok.io/home/update");
+                _Client.SetWebhookAsync("https://fce83a09.ngrok.io/home/update");
                 //_Client.OnInlineQuery += Client_OnInlineQuery;
                 //  _Client.OnUpdate += Client_OnUpdate;
                 //
