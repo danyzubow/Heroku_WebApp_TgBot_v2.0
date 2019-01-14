@@ -54,7 +54,7 @@ namespace cat
                 Information.NameBot = "@seadogs4_bot";
                 Information.Path = Environment.CurrentDirectory+"//";// + "/wwwroot/"  + "/Data/";
                 Information.FtpContactDll = "ftpcontact.dll"; //unix .dll обезательно
-                _Release = false;
+                _Release = true;
                 System.IO.File.Copy($"{Environment.CurrentDirectory}/wwwroot/Data/ftpcontact.dll", $"{Environment.CurrentDirectory}/ftpcontact.dll");
                 ////ChatData.ChatData.DownloadSaves();
                 _Client.DeleteWebhookAsync();
