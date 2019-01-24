@@ -1,11 +1,11 @@
-﻿using cat.Bot;
-using cat.Model;
-using System;
+﻿using System;
 using System.Diagnostics;
+using PorterOfChat.Bot;
+using PorterOfChat.Model;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace cat.Control
+namespace PorterOfChat.Control
 {
 
 
@@ -87,10 +87,10 @@ namespace cat.Control
         {
 
             InlineKeyboardMarkup inlinemMarkup = new InlineKeyboardMarkup(ButtonsOfMenu);
-            if (Del_Last_Message != null) _Client.DeleteMessageAsync(Information.AdminChatId, (int)Del_Last_Message);
+            if (Del_Last_Message != null) _Client.DeleteMessageAsync(Settings.AdminChatId, (int)Del_Last_Message);
 
 
-            await _Client.SendTextMessageAsync(Information.AdminChatId, Pre_Title + Title, ParseMode.Html,
+            await _Client.SendTextMessageAsync(Settings.AdminChatId, Pre_Title + Title, ParseMode.Html,
                  false, false, 0, inlinemMarkup);
 
 

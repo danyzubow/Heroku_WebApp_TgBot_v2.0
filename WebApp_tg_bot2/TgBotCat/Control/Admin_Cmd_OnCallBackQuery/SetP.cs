@@ -1,10 +1,10 @@
-﻿using cat.Bot.Model;
-using cat.Service;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using PorterOfChat.Bot.Model;
+using PorterOfChat.Service;
 using Telegram.Bot.Types;
 
 
-namespace cat.Control.Admin_Cmd_OnCallBackQuery
+namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 {
     public class SetP : Command
     {
@@ -26,7 +26,7 @@ namespace cat.Control.Admin_Cmd_OnCallBackQuery
             var newPidor = setPidor(ThisChat, thisUser);
            new Task(() => FindingPidor( ThisChat, newPidor)).Start();
             string outStr =
-                $"<b>Complete.</b> Чат=> <b>* ) '{ThisChat.Name}'</b> [{ThisChat.Id}] - " +
+                $"<b>Complete.</b> Чат=> <b>* ) '{ThisChat.Name}'</b> [{ThisChat.Id_tg}] - " +
                 $"\n'Підор' =<b>{ThisChat.FullPidor}</b>; [Последний раз(дата):{ThisChat.DatePidor}]" +
                 $"\n'Батя' =<b>{ThisChat.FullDad}</b>; [Последний раз(дата):{ThisChat.DateDad}]";
             new Menu

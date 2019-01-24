@@ -5,16 +5,16 @@
       <cUser>
         <Name>Даня</Name>
         <CountPidor>5</CountPidor>
-        <CountDad>2</CountDad>
-        <Id_tg_tg>551464694</Id_tg_tg>
+        <CountDad>3</CountDad>
+        <Id_tg>551464694</Id_tg>
         <FullName>Даня  (@dunngers_old)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
       <cUser>
         <Name>Даня</Name>
-        <CountPidor>3</CountPidor>
+        <CountPidor>5</CountPidor>
         <CountDad>2</CountDad>
-        <Id_tg_tg>227950395</Id_tg_tg>
+        <Id_tg>227950395</Id_tg>
         <FullName>Даня Зубов (@dunngers)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -22,13 +22,13 @@
     <LockGroupPidor>false</LockGroupPidor>
     <LockGroupDad>false</LockGroupDad>
     <Name>MyBot_release</Name>
-    <Id_tg_tg>-182112682</Id_tg_tg>
-    <DatePidor>03.01.2019</DatePidor>
-    <Pidor>Даня -🌈ШЛЮХА 🐿 👠</Pidor>
-    <FullPidor>Даня  (@dunngers_old)</FullPidor>
-    <Dad>Даня -🔝БАТЯ дня ✌️ 👬</Dad>
-    <FullDad>Даня Зубов (@dunngers)</FullDad>
-    <DateDad>08/03/2018</DateDad>
+    <Id_tg>-182112682</Id_tg>
+    <DatePidor>01/14/2019</DatePidor>
+    <Pidor>Даня -🌈ПІДОР 🏃 🤝</Pidor>
+    <FullPidor>Даня Зубов (@dunngers)</FullPidor>
+    <Dad>Даня -🔝БАТЯ дня ⚰️ 🐿</Dad>
+    <FullDad>Даня  (@dunngers_old)</FullDad>
+    <DateDad>01/04/2019</DateDad>
     <CountMembers>3</CountMembers>
   </cChat>
   <cChat>
@@ -37,7 +37,7 @@
         <Name>Даня</Name>
         <CountPidor>7</CountPidor>
         <CountDad>4</CountDad>
-        <Id_tg_tg>227950395</Id_tg_tg>
+        <Id_tg>227950395</Id_tg>
         <FullName>Даня Зубов (@dunngers)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -45,7 +45,7 @@
         <Name>Віталій</Name>
         <CountPidor>3</CountPidor>
         <CountDad>3</CountDad>
-        <Id_tg_tg>394321579</Id_tg_tg>
+        <Id_tg>394321579</Id_tg>
         <FullName>Віталій Ігорович (@iLinky)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -53,7 +53,7 @@
         <Name>Рома</Name>
         <CountPidor>3</CountPidor>
         <CountDad>4</CountDad>
-        <Id_tg_tg>418900500</Id_tg_tg>
+        <Id_tg>418900500</Id_tg>
         <FullName>Рома  (@Roman_kit)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -61,7 +61,7 @@
         <Name>Taras</Name>
         <CountPidor>2</CountPidor>
         <CountDad>5</CountDad>
-        <Id_tg_tg>380794100</Id_tg_tg>
+        <Id_tg>380794100</Id_tg>
         <FullName>Taras Vynar (@t_vynar)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -69,7 +69,7 @@
         <Name>Паша</Name>
         <CountPidor>5</CountPidor>
         <CountDad>0</CountDad>
-        <Id_tg_tg>347843897</Id_tg_tg>
+        <Id_tg>347843897</Id_tg>
         <FullName>Паша Милещук</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -77,7 +77,7 @@
         <Name>Alex</Name>
         <CountPidor>4</CountPidor>
         <CountDad>1</CountDad>
-        <Id_tg_tg>330597013</Id_tg_tg>
+        <Id_tg>330597013</Id_tg>
         <FullName>Alex Herasymchuk (@AlphaSanets)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -85,7 +85,7 @@
     <LockGroupPidor>false</LockGroupPidor>
     <LockGroupDad>false</LockGroupDad>
     <Name>Карбюратор тім</Name>
-    <Id_tg_tg>-219917058</Id_tg_tg>
+    <Id_tg>-219917058</Id_tg>
     <DatePidor>11/03/2018</DatePidor>
     <Pidor>Рома -🌈ПІДОР 🤝 🐓</Pidor>
     <FullPidor>Рома  (@Roman_kit)</FullPidor>
@@ -100,7 +100,7 @@
         <Name>Даня</Name>
         <CountPidor>0</CountPidor>
         <CountDad>0</CountDad>
-        <Id_tg_tg>227950395</Id_tg_tg>
+        <Id_tg>227950395</Id_tg>
         <FullName>Даня Зубов (@dunngers)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -108,7 +108,7 @@
         <Name>Анастасія</Name>
         <CountPidor>3</CountPidor>
         <CountDad>1</CountDad>
-        <Id_tg_tg>358581574</Id_tg_tg>
+        <Id_tg>358581574</Id_tg>
         <FullName>Анастасія Зубова (@igypsy)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -116,7 +116,7 @@
     <LockGroupPidor>false</LockGroupPidor>
     <LockGroupDad>false</LockGroupDad>
     <Name>Sobaka</Name>
-    <Id_tg_tg>-254330186</Id_tg_tg>
+    <Id_tg>-254330186</Id_tg>
     <DatePidor>08/08/2018</DatePidor>
     <Pidor>Анастасія -🌈ПІДОР 🏋️ 👌</Pidor>
     <FullPidor>Анастасія Зубова (@igypsy)</FullPidor>
@@ -131,7 +131,7 @@
         <Name>Анастасія</Name>
         <CountPidor>1</CountPidor>
         <CountDad>1</CountDad>
-        <Id_tg_tg>358581574</Id_tg_tg>
+        <Id_tg>358581574</Id_tg>
         <FullName>Анастасія Зубова (@igypsy)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -139,7 +139,7 @@
         <Name>Liuda</Name>
         <CountPidor>1</CountPidor>
         <CountDad>0</CountDad>
-        <Id_tg_tg>351599929</Id_tg_tg>
+        <Id_tg>351599929</Id_tg>
         <FullName>Liuda Chuzdiuk</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -147,7 +147,7 @@
         <Name>Іванна Особа</Name>
         <CountPidor>0</CountPidor>
         <CountDad>1</CountDad>
-        <Id_tg_tg>389941140</Id_tg_tg>
+        <Id_tg>389941140</Id_tg>
         <FullName>Іванна Особа </FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -155,7 +155,7 @@
         <Name>Кетрін</Name>
         <CountPidor>0</CountPidor>
         <CountDad>0</CountDad>
-        <Id_tg_tg>427057300</Id_tg_tg>
+        <Id_tg>427057300</Id_tg>
         <FullName>Кетрін Жидчук</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -163,7 +163,7 @@
     <LockGroupPidor>false</LockGroupPidor>
     <LockGroupDad>false</LockGroupDad>
     <Name>ЛІНАК 👩‍👩‍👧‍👧👸</Name>
-    <Id_tg_tg>-151232691</Id_tg_tg>
+    <Id_tg>-151232691</Id_tg>
     <DatePidor>07/02/2018</DatePidor>
     <Pidor>Анастасія -🌈ПІДОР 🏃 👠</Pidor>
     <FullPidor>Анастасія Зубова (@igypsy)</FullPidor>
@@ -178,7 +178,7 @@
         <Name>Анастасія</Name>
         <CountPidor>5</CountPidor>
         <CountDad>5</CountDad>
-        <Id_tg_tg>358581574</Id_tg_tg>
+        <Id_tg>358581574</Id_tg>
         <FullName>Анастасія Зубова (@igypsy)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -186,7 +186,7 @@
         <Name>Olga</Name>
         <CountPidor>9</CountPidor>
         <CountDad>4</CountDad>
-        <Id_tg_tg>245572174</Id_tg_tg>
+        <Id_tg>245572174</Id_tg>
         <FullName>Olga </FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -194,7 +194,7 @@
     <LockGroupPidor>false</LockGroupPidor>
     <LockGroupDad>false</LockGroupDad>
     <Name>Моя псіна</Name>
-    <Id_tg_tg>-296289577</Id_tg_tg>
+    <Id_tg>-296289577</Id_tg>
     <DatePidor>11/28/2018</DatePidor>
     <Pidor>Анастасія -🌈ПІДОР 🏃 👌</Pidor>
     <FullPidor>Анастасія Зубова (@igypsy)</FullPidor>
@@ -209,7 +209,7 @@
         <Name>Саня</Name>
         <CountPidor>2</CountPidor>
         <CountDad>5</CountDad>
-        <Id_tg_tg>418173017</Id_tg_tg>
+        <Id_tg>418173017</Id_tg>
         <FullName>Саня Саня</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -217,7 +217,7 @@
         <Name>Рома</Name>
         <CountPidor>2</CountPidor>
         <CountDad>1</CountDad>
-        <Id_tg_tg>418900500</Id_tg_tg>
+        <Id_tg>418900500</Id_tg>
         <FullName>Рома  (@Roman_kit)</FullName>
         <GenderFemale>false</GenderFemale>
       </cUser>
@@ -225,7 +225,7 @@
     <LockGroupPidor>false</LockGroupPidor>
     <LockGroupDad>false</LockGroupDad>
     <Name>Друзі з Місячком 2.0</Name>
-    <Id_tg_tg>-208984641</Id_tg_tg>
+    <Id_tg>-208984641</Id_tg>
     <DatePidor>08/22/2018</DatePidor>
     <Pidor>Рома -🌈ПІДОР 🐿 🏃‍</Pidor>
     <FullPidor>Рома  (@Roman_kit)</FullPidor>
@@ -233,36 +233,5 @@
     <FullDad>Саня Саня</FullDad>
     <DateDad>08/22/2018</DateDad>
     <CountMembers>6</CountMembers>
-  </cChat>
-  <cChat>
-    <users>
-      <cUser>
-        <Name>Даня</Name>
-        <CountPidor>0</CountPidor>
-        <CountDad>1</CountDad>
-        <Id_tg_tg>227950395</Id_tg_tg>
-        <FullName>Даня Зубов (@dunngers)</FullName>
-        <GenderFemale>false</GenderFemale>
-      </cUser>
-      <cUser>
-        <Name>Даня</Name>
-        <CountPidor>1</CountPidor>
-        <CountDad>0</CountDad>
-        <Id_tg_tg>551464694</Id_tg_tg>
-        <FullName>Даня  (@dunngers_old)</FullName>
-        <GenderFemale>false</GenderFemale>
-      </cUser>
-    </users>
-    <LockGroupPidor>false</LockGroupPidor>
-    <LockGroupDad>false</LockGroupDad>
-    <Name>MyBot_Debug</Name>
-    <Id_tg_tg>-265678965</Id_tg_tg>
-    <DatePidor>03.01.2019</DatePidor>
-    <Pidor>Даня -🌈ПІДОР 💪 🙏</Pidor>
-    <FullPidor>Даня  (@dunngers_old)</FullPidor>
-    <Dad>Даня -🔝БАТЯ дня 👨‍👧 🏋️</Dad>
-    <FullDad>Даня Зубов (@dunngers)</FullDad>
-    <DateDad>03.01.2019</DateDad>
-    <CountMembers>3</CountMembers>
   </cChat>
 </ArrayOfCChat>

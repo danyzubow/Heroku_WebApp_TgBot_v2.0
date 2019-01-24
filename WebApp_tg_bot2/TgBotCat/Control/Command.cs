@@ -1,13 +1,13 @@
-﻿using cat.Bot;
-using cat.Bot.Model;
-using cat.Model;
-using cat.Service;
-using System.Linq;
+﻿using System.Linq;
+using PorterOfChat.Bot;
+using PorterOfChat.Bot.Model;
+using PorterOfChat.Model;
+using PorterOfChat.Service;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace cat.Control
+namespace PorterOfChat.Control
 {
     public abstract class Command : BaseControl
     {
@@ -148,7 +148,7 @@ namespace cat.Control
             {
                 if (Current_Command_ == null)
                 {
-                    Current_Command_ = EE_Message.Text.Split(Information.NameBot).First();
+                    Current_Command_ = EE_Message.Text.Split(Settings.NameBot).First();
 
                 }
 
@@ -172,7 +172,7 @@ namespace cat.Control
         }
         protected async void send_Message_html_admin(string text)
         {
-            await _Client.SendTextMessageAsync(Information.AdminChatId, text, ParseMode.Html);
+            await _Client.SendTextMessageAsync(Settings.AdminChatId, text, ParseMode.Html);
         }
     }
 

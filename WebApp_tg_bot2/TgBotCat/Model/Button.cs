@@ -1,8 +1,8 @@
-﻿using cat.Control;
+﻿using PorterOfChat.Control;
 using Telegram.Bot.Types.ReplyMarkups;
 
 
-namespace cat.Model
+namespace PorterOfChat.Model
 {
 
     public class Button : InlineKeyboardButton

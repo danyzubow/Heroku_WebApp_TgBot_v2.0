@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using PorterOfChat;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using WebApp_tg_bot2.Models;
-
-using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using WebApp_tg_bot2.Models;
 namespace WebApp_tg_bot2.Controllers
 {
     public class HomeController : Controller
     {
+        static PorterOfChat.Porter _porter;
         public IActionResult Index()
         {
             return View();
@@ -31,21 +28,42 @@ namespace WebApp_tg_bot2.Controllers
 
             return View();
         }
-      //  [HttpPost]
+        //  [HttpPost]
         public OkResult update([FromBody]Update update)
         {
-            cat.Program.Initialization(null);
-          
+            if (_porter == null)
+            {
+
+                string Token;
+                string NameBot;
+
+                string Path;
+                string ftpContactDll ;
+#if DEBUG
+                Token = "521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM"; //debug token
+                NameBot = "@PorterOfChatBot";
+                ftpContactDll = $"{Environment.CurrentDirectory}\\wwwroot\\Data\\ftpcontact.dll";
+                Path = Environment.CurrentDirectory + "//"; ;
+#else
+                Token = "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts";
+                NameBot = "@seadogs4_bot";
+                Path = Environment.CurrentDirectory + "\\wwwroot\\Data\\";
+                ftpContactDll = $"{Environment.CurrentDirectory}/wwwroot/Data/ftpcontact.dll";
+#endif
+                _porter = new Porter(Token, NameBot, Path, "Saves.xml", ftpContactDll);
+            }
+
+
             switch (update.Type)
             {
                 case UpdateType.Message:
-             
-                    cat.Program.OnMessage(update.Message);
+
+                    PorterOfChat.Porter.OnMessage(update.Message);
                     break;
                 case UpdateType.CallbackQuery:
-                  
-               
-                    cat.Program.OnCallbackQuery(update.CallbackQuery);
+
+
+                    PorterOfChat.Porter.OnCallbackQuery(update.CallbackQuery);
 
                     break;
             }

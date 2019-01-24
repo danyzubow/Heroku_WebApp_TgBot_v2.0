@@ -1,11 +1,11 @@
-﻿using cat.Bot.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PorterOfChat.Bot.Model;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace cat.Control.UserComands_onMessage
+namespace PorterOfChat.Control.UserComands_onMessage
 {
     public class loser : Command
     {
@@ -57,7 +57,7 @@ namespace cat.Control.UserComands_onMessage
         public override string NameCommand { get; } = "/reg";
         protected override async void Execution(Message m)
         {
-            if (ThisChat == null) //(!ContainsGroupFromDic(e.Message.cChat.Id.ToString()))
+            if (ThisChat == null) //(!ContainsGroupFromDic(e.Message.cChat.Id_tg.ToString()))
             {
                 string nameGroup;
                 if (m.Chat.Title == null)
@@ -66,7 +66,7 @@ namespace cat.Control.UserComands_onMessage
                     nameGroup = m.Chat.Title;
                 var newChat = new cChat(new List<cUser>())
                 {
-                    Id = ChatIDs(m),
+                    Id_tg = ChatIDs(m),
                     Name = nameGroup
                 };
                 _Chats.Add(newChat);
@@ -83,7 +83,7 @@ namespace cat.Control.UserComands_onMessage
                             (username != null ? $" (@{username})" : "");
                 var newUser = new cUser
                 {
-                    Id = m.From.Id.ToString(),
+                    Id_tg = m.From.Id.ToString(),
                     FullName = sName,
                     Name = m.From.FirstName,
                     CountPidor = "0",
@@ -110,7 +110,7 @@ namespace cat.Control.UserComands_onMessage
             }
 
             thisUser = FindGroupID(m).users.Find(t =>
-                t.Id == UserIDs(m));
+                t.Id_tg == UserIDs(m));
             thisUser.GenderFemale = true;
             await Tclient.SendTextMessageAsync(chatID, thisUser.Name + " стає подругой👠");
         }
@@ -128,7 +128,7 @@ namespace cat.Control.UserComands_onMessage
             }
 
             thisUser = FindGroupID(m).users.Find(t =>
-                t.Id == UserIDs(m));
+                t.Id_tg == UserIDs(m));
             thisUser.GenderFemale = false;
             await Tclient.SendTextMessageAsync(chatID, thisUser.Name + " стає пациком💪🏻");
         }
@@ -149,7 +149,7 @@ namespace cat.Control.UserComands_onMessage
                 if (ContainsUserFromDic(m))
                 {
                     thisUser = FindGroupID(m).users.Find(t =>
-                        t.Id == UserIDs(m));
+                        t.Id_tg == UserIDs(m));
                     FindGroupID(m).users.Remove(thisUser);
                     await Tclient.SendTextMessageAsync(chatID, sName + " ліває🚮");
                 }

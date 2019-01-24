@@ -1,13 +1,13 @@
-﻿namespace cat.Test
+﻿namespace PorterOfChat.Test
 {
     public class Test
     {
         //static void Main(string[] args)
         //{
         //    Message message = Deserialize_local<Message>("dunngers");
-        //    cat.Program.Initialization(null);
-        //    cat.Program.Write("dunngers", message.Text);
-        //    cat.Program.OnMessage(message);
+        //    cat.Porter.Initialization(null);
+        //    cat.Porter.Write("dunngers", message.Text);
+        //    cat.Porter.OnMessage(message);
 
         //}
 

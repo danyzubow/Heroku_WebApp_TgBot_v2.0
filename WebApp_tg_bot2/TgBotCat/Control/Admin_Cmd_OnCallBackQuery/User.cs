@@ -1,10 +1,9 @@
-﻿using cat.Bot.Model;
-
-using cat.Model;
+﻿using PorterOfChat.Bot.Model;
+using PorterOfChat.Model;
 using Telegram.Bot.Types;
 
 
-namespace cat.Control.Admin_Cmd_OnCallBackQuery
+namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 {
     public class User : Command
     {
@@ -12,7 +11,7 @@ namespace cat.Control.Admin_Cmd_OnCallBackQuery
 
         public Button getButton(cChat chat,cUser user)
         {
-            return new Button(user.FullName, this,chat.Id, user.Id);
+            return new Button(user.FullName, this,chat.Id_tg, user.Id_tg);
         }
 
         protected override void Execution(CallbackQuery c)

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using cat.Bot.Model;
-using cat.Control;
-using cat.Model;
+using PorterOfChat.Bot.Model;
+using PorterOfChat.Control;
+using PorterOfChat.Model;
 using Telegram.Bot.Types;
 
 
-namespace cat.Control.Admin_Cmd_OnCallBackQuery
+namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 {
     public class Users : Command
     {
@@ -25,7 +25,7 @@ namespace cat.Control.Admin_Cmd_OnCallBackQuery
                 btns.ToArray(),
                 c.Message.MessageId,
                 $"Група <b>'{ThisChat.Name}</b>'" +
-                $"[{ThisChat.Id}] - " +
+                $"[{ThisChat.Id_tg}] - " +
                 $"\n'Пдр' =<b>{ThisChat.FullPidor}</b>; [Последний раз(дата):{ThisChat.DatePidor}]" +
                 $"\n'Батя' =<b>{ThisChat.FullDad}</b>; [Последний раз(дата):{ThisChat.DateDad}]" +
                 $"\nКоличество учасников={ThisChat.users.Count}" +

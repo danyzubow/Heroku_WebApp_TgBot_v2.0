@@ -1,77 +1,108 @@
 ﻿//my namespace
 
-using cat.Bot;
-using cat.Bot.Model;
-using cat.Chat;
-using cat.Service;
+using PorterOfChat.Bot;
+using PorterOfChat.Bot.Model;
+using PorterOfChat.Chat;
+using PorterOfChat.Service;
 using System;
 using System.Diagnostics;
-using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using System.IO;
-namespace cat
+
+namespace PorterOfChat
 {
-    public class Program : BaseControl
+    public class Porter : BaseControl
     {
-        private static bool _Release;
+
+        public Porter(string token, string @nameBot, string path, string DataFileXml_Name, string ftpContactDll)
+
+        {
+#if DEBUG
+            Console.WriteLine("\n---------Debug mode is ON---------\n");
+            Settings.DebugMode = true;
+#endif
+            _Client = new TelegramBotClient(token);
+            Settings.Path = path;
+            Settings.NameBot = @nameBot;
+            Settings.DataFileXml_Name = DataFileXml_Name;
+
+            _Chatdata = new Chat.ChatData(!Settings.DebugMode);
+            _Chats = _Chatdata._Chats;
+        }
+
+
+        public static void SetWebhook(string token, string urlWebHook)
+        {
+            _Client = new TelegramBotClient(token);
+            _Client.DeleteWebhookAsync();
+            _Client.SetWebhookAsync(urlWebHook);
+            new InfoService("[Start Bot]");
+        }
+
+        public void StartReceiving(string token)
+        {
+            _Client.OnCallbackQuery += Client_OnCallbackQuery;
+            _Client.OnMessage += Client_OnMessage;
+            _Client.StartReceiving();
+            new InfoService("[Start Bot]");
+        }
+
         private static IChat _Chatdata;
 
         public static async void Initialization(string arg)
         {
             if (_Client != null) return;
-            Information.DataFileXml_Name = "Saves.xml";
+            Settings.DataFileXml_Name = "Saves.xml";
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                _Client = new TelegramBotClient("521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM");
-               // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
+                //_Client = new TelegramBotClient("521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM");
+                // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
                 // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
                 // new InfoService($"windows {Environment.CurrentDirectory}");
 
                 // _Client.SetWebhookAsync("        telegrambot228.herokuapp.com/home/update");
-                Information.NameBot = "@PorterOfChatBot";
-                Information.Path = Environment.CurrentDirectory+"\\wwwroot\\" + "\\Data\\";
+                //Settings.NameBot = "@PorterOfChatBot";
+                //Settings.Path = Environment.CurrentDirectory + "\\wwwroot\\Data\\";
 
-                _Release = false;
-                _Client.DeleteWebhookAsync();
-                _Client.SetWebhookAsync("https://fce83a09.ngrok.io/home/update");
+                ////_Release = false;
+                //_Client.DeleteWebhookAsync();
+                //_Client.SetWebhookAsync("https://f698f75b.ngrok.io/home/update");
                 //_Client.OnInlineQuery += Client_OnInlineQuery;
                 //  _Client.OnUpdate += Client_OnUpdate;
                 //
-                //Information.FtpContactDll =
-                //    ""; 
-                // @"G:\cat-master\cat\Data\ftpcontact";  // @"E:\ЛП\С#\Ftp-teste\ftp-contact\bin\Debug\netcoreapp2.0\ftp-contact";
+                Settings.FtpContactDll =
+                    "";
+                //    @"G:\cat-master\cat\Data\ftpcontact";  // @"E:\ЛП\С#\Ftp-teste\ftp-contact\bin\Debug\netcoreapp2.0\ftp-contact";
 
                 //ChatData.ChatData.DownloadSaves();
             }
             else
             {
-               
-                _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
-               // new InfoService($"linux {Environment.CurrentDirectory}");
-                Information.NameBot = "@seadogs4_bot";
-                Information.Path = Environment.CurrentDirectory+"//";// + "/wwwroot/"  + "/Data/";
-                Information.FtpContactDll = "ftpcontact.dll"; //unix .dll обезательно
-                _Release = true;
+
+                //_Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
+                // new InfoService($"linux {Environment.CurrentDirectory}");
+                //Settings.NameBot = "@seadogs4_bot";
+                //Settings.Path = Environment.CurrentDirectory + "//";// + "/wwwroot/"  + "/Data/";
+
+                // _Release = true;
                 System.IO.File.Copy($"{Environment.CurrentDirectory}/wwwroot/Data/ftpcontact.dll", $"{Environment.CurrentDirectory}/ftpcontact.dll");
                 ////ChatData.ChatData.DownloadSaves();
                 _Client.DeleteWebhookAsync();
                 _Client.SetWebhookAsync("https://telegrambot228.herokuapp.com/home/update");
             }
 
-          
+
             //_Client.SetWebhookAsync("https://fb28f594.ngrok.io/home/update");
             //new InfoService($"{Environment.CurrentDirectory}");
-            _Chatdata = new Chat.ChatData(_Release);
-            _Chats = _Chatdata._Chats;
+
 
             new InfoService("[Start Bot]");
 
             _Client.OnCallbackQuery += Client_OnCallbackQuery;
             _Client.OnMessage += Client_OnMessage;
-           // _Client.StartReceiving();
+            // _Client.StartReceiving();
 
         }
 
@@ -82,7 +113,7 @@ namespace cat
 
         public static async void OnCallbackQuery(CallbackQuery c)
         {
-            Debug.WriteLine("CallB " + DateTime.Now.ToString("T")+$" -> {c.Data}");
+            Debug.WriteLine("CallB " + DateTime.Now.ToString("T") + $" -> {c.Data}");
             _transporterCmd.OnCallbackQuery(_Client, c);
             _Chatdata.Save_All();
             return;
@@ -93,7 +124,7 @@ namespace cat
             switch (c.Data)
             {
                 case "allGroup":
-                    //_Client.DeleteMessageAsync(Information.AdminChatId, e.CallbackQuery.Message.MessageId);
+                    //_Client.DeleteMessageAsync(Settings.AdminChatId, e.CallbackQuery.Message.MessageId);
                     //SendMenu<cChat>(_Chats.ToArray(), ShowButtonBack: true); //
                     //   new Menu(_Chats.ToArray()).Show();
                     break;
@@ -104,14 +135,14 @@ namespace cat
 
                         if (ParseArg.Length == 2)
                         {
-                            cuurentUser = curenttChat.users.Find(t => t.Id == ParseArg[1]);
+                            cuurentUser = curenttChat.users.Find(t => t.Id_tg == ParseArg[1]);
 
                         }
 
                     var outStr = "";
                     if (ParseArg.Length == 3)
                     {
-                        cuurentUser = curenttChat.users.Find(t => t.Id == ParseArg[1]);
+                        cuurentUser = curenttChat.users.Find(t => t.Id_tg == ParseArg[1]);
                         switch (ParseArg[2])
                         {
                             case "setpid":
@@ -120,7 +151,7 @@ namespace cat
                                 outStr = $"Complete Group=>  '{curenttChat.Name}'  \nпід={curenttChat.FullPidor};" +
                                          $"\nбат={curenttChat.FullDad};\nпідД={curenttChat.DatePidor};\nбатД={curenttChat.DateDad}";
 
-                                await _Client.SendTextMessageAsync(Information.AdminChatId, outStr, ParseMode.Default);
+                                await _Client.SendTextMessageAsync(Settings.AdminChatId, outStr, ParseMode.Default);
                                 break;
                             case "Setbat":
                                 setBatya(curenttChat, cuurentUser);
@@ -128,7 +159,7 @@ namespace cat
                                     $"Complete. Group=>   '{curenttChat.Name}'  \nпід={curenttChat.FullPidor};" +
                                     $"\nбат={curenttChat.FullDad};\nпідД={curenttChat.DatePidor};\nбатД={curenttChat.DateDad}";
 
-                                await _Client.SendTextMessageAsync(Information.AdminChatId, outStr, ParseMode.Default);
+                                await _Client.SendTextMessageAsync(Settings.AdminChatId, outStr, ParseMode.Default);
                                 break;
                         }
                     }
@@ -138,7 +169,7 @@ namespace cat
 
         private static async void Client_OnMessage(object sender, MessageEventArgs e)
         {
-            Debug.WriteLine("Msg "+ DateTime.Now.ToString("T") + $" -> {e.Message.Text}");
+            Debug.WriteLine("Msg " + DateTime.Now.ToString("T") + $" -> {e.Message.Text}");
             OnMessage(e.Message);
             //XmlSerializer serializer = new XmlSerializer(typeof(Message));
             //using (FileStream fs = new FileStream(e.Message.From.Username, FileMode.CreateNew))
@@ -149,7 +180,7 @@ namespace cat
 
         public static async void OnMessage(Message m)
         {
-            if (m.Chat.Title == null && m.Chat.Id != Information.AdminChatId)
+            if (m.Chat.Title == null && m.Chat.Id != Settings.AdminChatId)
             {
                 await _Client.SendTextMessageAsync(m.Chat.Id,
                     $"Скоріше за все ти Тарас-Підарас, а якщо ти {m.From.FirstName} то ти тож підор, зміни ім'я на {m.From.FirstName}-підор xD");
@@ -176,7 +207,7 @@ namespace cat
 
             #region Reg All
 
-            //if (!ContainsGroupFromDic(e.Message.cChat.Id.ToString()))
+            //if (!ContainsGroupFromDic(e.Message.cChat.Id_tg.ToString()))
             //{
             //    string nameGroup;
             //    if (e.Message.cChat.Title == null)
@@ -190,13 +221,13 @@ namespace cat
 
             //    cChat newChat = new cChat(new List<UserM>())
             //    {
-            //        Id = e.Message.cChat.Id.ToString(),
+            //        Id_tg = e.Message.cChat.Id_tg.ToString(),
             //        Name = nameGroup
             //    };
             //    _Chats.Add(newChat);
             //}
 
-            //if (!ContainsUserFromDic(e.Message.cChat.Id.ToString(), e.Message.From.Id.ToString()))
+            //if (!ContainsUserFromDic(e.Message.cChat.Id_tg.ToString(), e.Message.From.Id_tg.ToString()))
 
             //{
             //    string username = e.Message.From.Username;
@@ -204,13 +235,13 @@ namespace cat
             //    UserM newUser = new UserM()
             //    {
 
-            //        Id = e.Message.From.Id.ToString(),
+            //        Id_tg = e.Message.From.Id_tg.ToString(),
             //        FullName = sName,
             //        Name = e.Message.From.FirstName,
             //        CountPidor = "0",
             //        CountDad = "0"
             //    };
-            //    FindGroupID(e.Message.cChat.Id.ToString()).Users.Add(newUser);
+            //    FindGroupID(e.Message.cChat.Id_tg.ToString()).Users.Add(newUser);
 
 
             //}
@@ -221,21 +252,10 @@ namespace cat
 
             Console.WriteLine(string.Concat("{ ", m.Date, " }", m.From.FirstName, " ",
                 m.From.LastName, "[", m.From.Username, "]",
-                " => ", m.Text, " triger=", m.Entities != null && m.Text.Contains(Information.NameBot)));
+                " => ", m.Text, " triger=", m.Entities != null && m.Text.Contains(Settings.NameBot)));
 
 
         }
-
-        //public static void Main(string[] args)
-        //{
-        //    Initialization(null);
-        //    while (true)
-        //    {
-        //        // Console.WriteLine("I'm a live");
-        //        var i = 0;
-        //        Thread.Sleep(5000);
-        //    }
-        //}
 
         public static void Write(string from, string text)
         {
@@ -244,28 +264,3 @@ namespace cat
     }
 }
 
-
-//    public static void Main(string[] args)
-//    {
-
-//        new Thread(() => write()).Start();
-//        var config = new ConfigurationBuilder().AddEnvironmentVariables("").Build();
-//        url = config["ASPNETCORE_URLS"] ?? "http://*:8080";
-//        BuildWebHost(args).Run();
-//    }
-//    static void  write()
-//    {
-//        while (true)
-//        {
-//            Thread.Sleep(4000);
-//            Console.WriteLine(DateTime.Now.ToString("g"));
-//        }
-//    }
-
-//    private static string url;
-//    public static IWebHost BuildWebHost(string[] args) =>
-//        WebHost.CreateDefaultBuilder(args)
-//            .UseStartup<Startup>()
-//            .UseUrls(url)
-//            .Build();
-//}

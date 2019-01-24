@@ -1,10 +1,9 @@
-﻿using cat.Bot.Model;
-
-using cat.Model;
+﻿using PorterOfChat.Bot.Model;
+using PorterOfChat.Model;
 using Telegram.Bot.Types;
 
 
-namespace cat.Control.Admin_Cmd_OnCallBackQuery
+namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 {
     public class Chat : Command
     {
@@ -12,7 +11,7 @@ namespace cat.Control.Admin_Cmd_OnCallBackQuery
 
         public Button getButton(cChat chat)
         {
-            return new Button(chat.Name, this, chat.Id);
+            return new Button(chat.Name, this, chat.Id_tg);
         }
 
         protected override void Execution(CallbackQuery c)
@@ -20,7 +19,7 @@ namespace cat.Control.Admin_Cmd_OnCallBackQuery
             new Menu(new Chats().getButton(),
                 c.Message.MessageId,
                 $"Група <b>'{ThisChat.Name}</b>'" +
-                $"[{ThisChat.Id}] - " +
+                $"[{ThisChat.Id_tg}] - " +
                 $"\n'Підор' =<b>{ThisChat.FullPidor}</b>; [Последний раз(дата):{ThisChat.DatePidor}]" +
                 $"\n'Батя' =<b>{ThisChat.FullDad}</b>; [Последний раз(дата):{ThisChat.DateDad}]" +
                 $"\nКоличество учасников={ThisChat.users.Count}" +

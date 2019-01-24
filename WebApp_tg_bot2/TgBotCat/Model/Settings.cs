@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
-namespace cat.Bot
+namespace PorterOfChat.Bot
 {
 
 
-    internal static class Information
+    internal static class Settings
     {
         public static int AdminChatId = 227950395;
         public static string NameBot; //  "@seadogs4_bot"
@@ -22,6 +23,7 @@ namespace cat.Bot
         /// </summary>
         public static string Path="";
 
+        public static bool DebugMode=false;
         private static string DataFileXml_Name_;
         /// <summary>
         /// Файл xml хранение данных. обязательно Указать path!!
@@ -30,7 +32,7 @@ namespace cat.Bot
         {
             get
             {
-                if(Path=="") throw new Exception("Не указан путь Path('Information')");
+                if(Path=="") throw new Exception("Не указан путь Path('Settings')");
                 return Path + DataFileXml_Name_;
             }
             set { DataFileXml_Name_ = value; }
@@ -41,7 +43,7 @@ namespace cat.Bot
         {
             get
             {
-                if (Path == "") throw new Exception("Не указан путь Path('Information')");
+                if (Path == "") throw new Exception("Не указан путь Path('Settings')");
                 if (FtpContactDll_ == null) return null;
                 return Path + FtpContactDll_;
             }

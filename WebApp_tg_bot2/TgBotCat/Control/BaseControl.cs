@@ -1,28 +1,27 @@
-﻿using System;
+﻿using PorterOfChat.Bot;
+using PorterOfChat.Bot.Model;
+using PorterOfChat.Control;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using cat.Bot;
-using cat.Bot.Model;
-using cat.Control;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 using User = Telegram.Bot.Types.User;
 
-namespace cat
+namespace PorterOfChat
 {
-  
+
     public abstract class BaseControl
     {
-        protected static TransporterCMD _transporterCmd=new TransporterCMD();
+        protected static TransporterCMD _transporterCmd = new TransporterCMD();
         protected static TelegramBotClient _Client; //  "@seadogs4_bot" "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts"
         protected static List<cChat> _Chats;
         protected static cChat FindGroupID(string id) //
         {
             foreach (var el in _Chats)
-                if (el.Id == id)
+                if (el.Id_tg == id)
                     return el;
             return null;
         }
@@ -33,12 +32,12 @@ namespace cat
         protected static Bot.Model.cChat FindGroupID(Message e) //
         {
             foreach (var el in _Chats)
-                if (el.Id == ChatID(e).ToString())
+                if (el.Id_tg == ChatID(e).ToString())
                     return el;
             return null;
         }
-        
-        
+
+
 
         protected static cUser FindUserFromDic(string chatID, int num) //
         {
@@ -46,7 +45,7 @@ namespace cat
         }
         protected static cUser FindUser(string chatID, string id) //
         {
-            return FindGroupID(chatID).users.Find(t=>t.Id==id);
+            return FindGroupID(chatID).users.Find(t => t.Id_tg == id);
         }
         protected static cUser FindUserFromDic(Message e, int num) //
         {
@@ -57,7 +56,7 @@ namespace cat
             if (FindGroupID(chatId) == null) return false;
             var gGroup = FindGroupID(chatId);
             foreach (var t in gGroup.users)
-                if (t.Id == Id)
+                if (t.Id_tg == Id)
                     return true;
             return false;
         }
@@ -66,7 +65,7 @@ namespace cat
             if (FindGroupID(e) == null) return false;
             var gGroup = FindGroupID(e);
             foreach (var t in gGroup.users)
-                if (t.Id == ChatIDs(e))
+                if (t.Id_tg == ChatIDs(e))
                     return true;
             return false;
         }
@@ -88,8 +87,8 @@ namespace cat
             }
 
             tmpGroup.DatePidor = DateTime.Now.AddHours(3).ToString("d");
-            var emoj = $"{Information.EmojPidor[random.Next(0, Information.EmojPidor.Length)]}" +
-                       $" {Information.EmojPidor[random.Next(0, Information.EmojPidor.Length)]}";
+            var emoj = $"{Settings.EmojPidor[random.Next(0, Settings.EmojPidor.Length)]}" +
+                       $" {Settings.EmojPidor[random.Next(0, Settings.EmojPidor.Length)]}";
 
             var PidorOrHarlot = "ПІДОР";
 
@@ -121,8 +120,8 @@ namespace cat
             }
 
             tmpGroup.DateDad = DateTime.Now.AddHours(3).ToString("d");
-            var emoj2 = $"{Information.EmojPidor[random.Next(0, Information.EmojPidor.Length)]}" +
-                        $" {Information.EmojPidor[random.Next(0, Information.EmojPidor.Length)]}";
+            var emoj2 = $"{Settings.EmojPidor[random.Next(0, Settings.EmojPidor.Length)]}" +
+                        $" {Settings.EmojPidor[random.Next(0, Settings.EmojPidor.Length)]}";
 
             var DadToday = $"{User.Name} -🔝БАТЯ дня {emoj2}";
 
@@ -131,21 +130,21 @@ namespace cat
             return DadToday;
         }
 
-        protected static async void FindingPidor( cChat chat, string NewPidor)
+        protected static async void FindingPidor(cChat chat, string NewPidor)
         {
-            await _Client.SendTextMessageAsync(chat.Id, "Пошук вахтера по чату 🔍", ParseMode.Html);
+            await _Client.SendTextMessageAsync(chat.Id_tg, "Пошук вахтера по чату 🔍", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chat.Id, "<i>3 - опитані учасники гейпараду 🗣</i>", ParseMode.Html);
+            await _Client.SendTextMessageAsync(chat.Id_tg, "<i>3 - опитані учасники гейпараду 🗣</i>", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chat.Id, "<i>2 - твоїх друзів пустили по колу 🎡</i>", ParseMode.Html);
+            await _Client.SendTextMessageAsync(chat.Id_tg, "<i>2 - твоїх друзів пустили по колу 🎡</i>", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chat.Id, "<i>1 - 🤵🏿 x 10 нігерів виїхали до тебе додому </i>",
+            await _Client.SendTextMessageAsync(chat.Id_tg, "<i>1 - 🤵🏿 x 10 нігерів виїхали до тебе додому </i>",
                 ParseMode.Html);
             Thread.Sleep(1500);
-            await _Client.SendTextMessageAsync(chat.Id, "<code>BU-DUM-TSS 🎲</code>", ParseMode.Html);
+            await _Client.SendTextMessageAsync(chat.Id_tg, "<code>BU-DUM-TSS 🎲</code>", ParseMode.Html);
             Thread.Sleep(1500);
-            await _Client.SendTextMessageAsync(chat.Id, $"<b>{NewPidor}</b>", ParseMode.Html);
-            await _Client.SendTextMessageAsync(chat.Id, chat.FullPidor + " ⬅️ Link", ParseMode.Html);
+            await _Client.SendTextMessageAsync(chat.Id_tg, $"<b>{NewPidor}</b>", ParseMode.Html);
+            await _Client.SendTextMessageAsync(chat.Id_tg, chat.FullPidor + " ⬅️ Link", ParseMode.Html);
             chat.LockGroupPidor = false;
         }
 

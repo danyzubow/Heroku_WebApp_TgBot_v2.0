@@ -1,12 +1,16 @@
 ﻿using System;
-using cat.Bot;
-using cat.Service;
 using System.Collections.Generic;
 using System.Linq;
+using PorterOfChat.Bot;
+using PorterOfChat.Control.AdminComands_onMessage;
+using PorterOfChat.Control.Admin_Cmd_OnCallBackQuery;
+using PorterOfChat.Control.UserComands_onMessage;
+using PorterOfChat.Service;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using User = PorterOfChat.Control.Admin_Cmd_OnCallBackQuery.User;
 
-namespace cat.Control
+namespace PorterOfChat.Control
 {
 
 
@@ -23,29 +27,29 @@ namespace cat.Control
         {
             Comands_onMessage = new List<Command>()
             {
-                new cat.Control.UserComands_onMessage.loser(),
-                new cat.Control.UserComands_onMessage.batya(),
-                new cat.Control.UserComands_onMessage.leave(),
-                new cat.Control.UserComands_onMessage.reg(),
-                new cat.Control.UserComands_onMessage.setfemale(),
-                new cat.Control.UserComands_onMessage.sheriff(),
-                new cat.Control.UserComands_onMessage.setmale(),
-                new cat.Control.UserComands_onMessage.stats(),
+                new loser(),
+                new batya(),
+                new leave(),
+                new reg(),
+                new setfemale(),
+                new sheriff(),
+                new setmale(),
+                new stats(),
             };
             ComandsAdmin_onMessage = new List<Command>()
             {
-               new cat.Control.AdminComands_onMessage.adm(),
-              new cat.Control.AdminComands_onMessage.h(),
+               new adm(),
+              new h(),
 
             };
             ComandsAdmin_OnCallbackQuery = new List<Command>()
             {
-                new cat.Control.Admin_Cmd_OnCallBackQuery.Chats(),
-                new cat.Control.Admin_Cmd_OnCallBackQuery.Users(),
-                new cat.Control.Admin_Cmd_OnCallBackQuery.Chat(),
-                new cat.Control.Admin_Cmd_OnCallBackQuery.Setbat(),
-                new cat.Control.Admin_Cmd_OnCallBackQuery.SetP(),
-                new cat.Control.Admin_Cmd_OnCallBackQuery.User()
+                new Chats(),
+                new Users(),
+                new Admin_Cmd_OnCallBackQuery.Chat(),
+                new Setbat(),
+                new SetP(),
+                new User()
             };
         }
 
@@ -53,7 +57,7 @@ namespace cat.Control
         {
             try
             {
-                if (!m.Text.Contains(Information.NameBot) && (m.Chat.Id != Information.AdminChatId)) return;
+                if (!m.Text.Contains(Settings.NameBot) && (m.Chat.Id != Settings.AdminChatId)) return;
             }
             catch (Exception e)
             {
@@ -61,10 +65,10 @@ namespace cat.Control
                 return;
             } 
 
-            string comd = m.Text.Split(Information.NameBot).First(); ;
+            string comd = m.Text.Split(Settings.NameBot).First(); ;
 
             Command cmd =
-                (m.Chat.Id == Information.AdminChatId ? ComandsAdmin_onMessage : Comands_onMessage).Find(t =>
+                (m.Chat.Id == Settings.AdminChatId ? ComandsAdmin_onMessage : Comands_onMessage).Find(t =>
                     t.NameCommand == comd);
             if (cmd == null)
             {
@@ -78,10 +82,10 @@ namespace cat.Control
         public void OnCallbackQuery(object sender, CallbackQuery c)
         {
 
-            if (c.From.Id != Information.AdminChatId) return;
+            if (c.From.Id != Settings.AdminChatId) return;
             string comd = c.Data.Split("_").First();
             Command cmd =
-                (c.From.Id == Information.AdminChatId ? ComandsAdmin_OnCallbackQuery : null).Find(t =>
+                (c.From.Id == Settings.AdminChatId ? ComandsAdmin_OnCallbackQuery : null).Find(t =>
                    t.NameCommand == comd);
             if (cmd == null)
             {

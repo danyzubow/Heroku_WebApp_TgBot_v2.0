@@ -1,9 +1,8 @@
-﻿
-using cat.Bot;
-using cat.Control.Admin_Cmd_OnCallBackQuery;
+﻿using PorterOfChat.Bot;
+using PorterOfChat.Control.Admin_Cmd_OnCallBackQuery;
 using Telegram.Bot.Types;
 
-namespace cat.Control.AdminComands_onMessage
+namespace PorterOfChat.Control.AdminComands_onMessage
 {
     class adm : Command
     {
@@ -20,7 +19,7 @@ namespace cat.Control.AdminComands_onMessage
         protected override async void Execution(Message m)
         {
             string outStr = "Command:\n/data";
-            await _Client.SendTextMessageAsync(Information.AdminChatId, outStr);
+            await _Client.SendTextMessageAsync(Settings.AdminChatId, outStr);
         }
     }
 

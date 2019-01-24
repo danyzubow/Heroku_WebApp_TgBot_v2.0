@@ -1,7 +1,7 @@
-﻿using cat.Bot.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PorterOfChat.Bot.Model;
 
-namespace cat.Chat
+namespace PorterOfChat.Chat
 {
     public interface IChat
     {

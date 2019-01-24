@@ -1,9 +1,9 @@
-﻿using cat.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using PorterOfChat.Model;
 using Telegram.Bot.Types;
 
 
-namespace cat.Control.Admin_Cmd_OnCallBackQuery
+namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 {
     public class Chats : Command
     {

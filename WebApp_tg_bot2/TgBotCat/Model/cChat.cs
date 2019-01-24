@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using Telegram.Bot;
 
-namespace cat.Bot.Model
+namespace PorterOfChat.Bot.Model
 {
     [Serializable]
     public class cChat
     {
-        public List<cUser> users = new List<cUser>();
+        public  List<cUser> users { get; set; } 
         [NonSerialized] public bool LockGroupPidor = false;
         [NonSerialized] public bool LockGroupDad = false;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Id_tg { get; set; }
+        public string DatePidor { get; set; }
+        public string Pidor { get; set; }
+        public string FullPidor { get; set; }
+        public string Dad { get; set; }
+        public string FullDad { get; set; }
+        public string DateDad { get; set; }
 
-        public string Name;
-        public string Id;
-        public string DatePidor;
-        public string Pidor;
-        public string FullPidor;
-        public string Dad;
-        public string FullDad;
-        public string DateDad;
 
-
-        public int CountMembers;
+        public int CountMembers { get; set; }
 
         public cChat(List<cUser> userArg)
         {
@@ -30,12 +30,13 @@ namespace cat.Bot.Model
 
         public cChat()
         {
+            users=new List<cUser>();
         }
 
         public bool UpdateInfo(Telegram.Bot.Types.Chat nowChat, TelegramBotClient client)
         {
             var needSave = false;
-            var count = client.GetChatMembersCountAsync(long.Parse(Id)).Result;
+            var count = client.GetChatMembersCountAsync(long.Parse(Id_tg)).Result;
             if (count != CountMembers)
             {
                 CountMembers = count;

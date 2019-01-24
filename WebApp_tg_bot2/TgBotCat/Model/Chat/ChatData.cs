@@ -1,16 +1,17 @@
-﻿
-
-using cat.Bot;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Xml.Serialization;
-using cat.Bot.Model;
+using Microsoft.EntityFrameworkCore;
+using PorterOfChat.Bot;
+using PorterOfChat.Bot.Model;
+using WebApp_tg_bot2.TgBotCat.Model.Chat;
 
 
-namespace cat.Chat
+namespace PorterOfChat.Chat
 {
     public class ChatData : IChat
     {
@@ -19,10 +20,10 @@ namespace cat.Chat
         bool SaveBool = false;
         Thread _saveAllThreaThread;
 
-        public ChatData( bool Release)
+        public ChatData(bool Release)
         {
-          
-            _Chats=new List<cChat>();
+
+            _Chats = new List<cChat>();
             _Release = Release;
             DownloadSaves();
             LoadAllChats();
@@ -33,39 +34,62 @@ namespace cat.Chat
 
         public void DownloadSaves()
         {
-            if (Information.FtpContactDll == null) return;
-            Assembly assembly = Assembly.LoadFile(Information.FtpContactDll);//@"E:\ЛП\С#\Ftp-teste\Ftp-teste\ftp-contact"
+            if (Settings.FtpContactDll == null) return;
+            Assembly assembly = Assembly.LoadFile(Settings.FtpContactDll);//@"E:\ЛП\С#\Ftp-teste\Ftp-teste\ftp-contact"
             Type typeClass = assembly.GetType("ftp_contact");
 
             MethodInfo method = typeClass.GetMethod("Download");
-            string path = Information.DataFileXml_Name;
+            string path = Settings.DataFileXml_Name;
             method.Invoke(assembly, new object[] { path
             });
         }
         public void UploadSaves(string PATH = null)
         {
-            Assembly assembly = Assembly.LoadFile(Information.FtpContactDll);//@"E:\ЛП\С#\Ftp-teste\Ftp-teste\ftp-contact"
+            Assembly assembly = Assembly.LoadFile(Settings.FtpContactDll);//@"E:\ЛП\С#\Ftp-teste\Ftp-teste\ftp-contact"
             Type typeClass = assembly.GetType("ftp_contact");
 
             MethodInfo method = typeClass.GetMethod("Upload");
-            string path = (PATH == null ? Information.DataFileXml_Name : PATH);
+            string path = (PATH == null ? Settings.DataFileXml_Name : PATH);
             method.Invoke(assembly, new object[] { path });
         }
         #endregion
         public void LoadAllChats()//
         {
-            if (!File.Exists(Information.DataFileXml_Name)) return;
+            if (!File.Exists(Settings.DataFileXml_Name)) return;
             XmlSerializer serial = new XmlSerializer(typeof(List<cChat>));
-            using (FileStream fs = new FileStream(Information.DataFileXml_Name, FileMode.Open))
+            using (FileStream fs = new FileStream(Settings.DataFileXml_Name, FileMode.Open))
             {
                 _Chats = (List<cChat>)serial.Deserialize(fs);
             }
             foreach (var group in _Chats)
             {
+
                 group.LockGroupPidor = false;
                 group.LockGroupDad = false;
+                // group.Id_tg = group.Id.ToString();
+                group.Id = 0;
+            }
+
+            using (ChatDB chatdb = new ChatDB())
+            {
+
+
+                cChat ch1 = chatdb.chats.Include(q=>q.users).FirstOrDefault(t => t.Id_tg == "-182112682");
+               
+
+                var ch12 = chatdb.chats.Include(t=>t.users).ToList();
+                ch1.Pidor = "You";
+               // ch1.users[0].Name = "Xyu";
+                foreach (var t in _Chats)
+                {
+
+                    chatdb.chats.Add(t);
+                }
+
+                chatdb.SaveChanges();
 
             }
+
         }
 
         public void Save_All()//
@@ -78,20 +102,20 @@ namespace cat.Chat
 
         void Save_All_help() //
         {
-        
+
             while (true)
             {
                 if (SaveBool)
                 {
                     SaveBool = false;
                     XmlSerializer Serial = new XmlSerializer(typeof(List<cChat>));
-                   
-                    if (!Directory.Exists(Information.Path))
+
+                    if (!Directory.Exists(Settings.Path))
                     {
-                        Directory.CreateDirectory(Information.Path);
+                        Directory.CreateDirectory(Settings.Path);
                     }
-                    File.Delete(Information.DataFileXml_Name);
-                    using (FileStream fs = new FileStream(Information.DataFileXml_Name, FileMode.CreateNew))
+                    File.Delete(Settings.DataFileXml_Name);
+                    using (FileStream fs = new FileStream(Settings.DataFileXml_Name, FileMode.CreateNew))
                     {
                         Serial.Serialize(fs, _Chats);
                     }
