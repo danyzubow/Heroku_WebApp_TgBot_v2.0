@@ -16,7 +16,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
 
             if (Data.GetChat(m) == null)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+                 SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
@@ -24,7 +24,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
             if (ThisChat.LockGroupDad) return;
             if (ThisChat.users.Count == 0)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+                SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
@@ -45,9 +45,9 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
             }
             else
             {
-                await Tclient.SendTextMessageAsync(chatID, $"⚠️<b>Сьогодні {ThisChat.Dad}</b>",
+                SendTextMessageAsync(chatID, $"⚠️<b>Сьогодні {ThisChat.Dad}</b>",
                     ParseMode.Html);
-                await Tclient.SendTextMessageAsync(chatID, ThisChat.FullDad + " ⬅️ Link");
+                SendTextMessageAsync(chatID, ThisChat.FullDad + " ⬅️ Link");
             }
         }
     }

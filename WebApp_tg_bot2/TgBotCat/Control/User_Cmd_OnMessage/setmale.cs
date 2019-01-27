@@ -14,7 +14,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
         {
             if (!ContainsUserFromDic(m))
             {
-                await Tclient.SendTextMessageAsync(chatID,
+                SendTextMessageAsync(chatID,
                     m.From.FirstName + " ти не в темі🤔");
                 return;
             }
@@ -22,7 +22,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
             thisUser = Data.GetChat(m).users.Find(t =>
                 t.Id_tg == UserIDs(m));
             thisUser.GenderFemale = false;
-            await Tclient.SendTextMessageAsync(chatID, thisUser.Name + " стає пациком💪🏻");
+           SendTextMessageAsync(chatID, thisUser.Name + " стає пациком💪🏻");
         }
     }
 }

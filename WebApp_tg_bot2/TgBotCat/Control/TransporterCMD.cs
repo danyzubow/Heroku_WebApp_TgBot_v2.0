@@ -1,11 +1,10 @@
-﻿using System;
+﻿using PorterOfChat.Bot;
+using PorterOfChat.Control.Admin_Cmd_OnCallBackQuery;
+using PorterOfChat.Control.AdminComands_onMessage;
+using PorterOfChat.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using PorterOfChat.Bot;
-using PorterOfChat.Control.AdminComands_onMessage;
-using PorterOfChat.Control.Admin_Cmd_OnCallBackQuery;
-using PorterOfChat.Control.UserComands_onMessage;
-using PorterOfChat.Service;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage;
@@ -39,8 +38,9 @@ namespace PorterOfChat.Control
             };
             ComandsAdmin_onMessage = new List<Command>()
             {
-               new adm(),
-              new h(),
+                new adm(),
+                new h(),
+                new data()
 
             };
             ComandsAdmin_OnCallbackQuery = new List<Command>()
@@ -54,6 +54,7 @@ namespace PorterOfChat.Control
             };
         }
 
+
         public void OnMessage(TelegramBotClient sender, Message m)
         {
             try
@@ -62,9 +63,9 @@ namespace PorterOfChat.Control
             }
             catch (Exception e)
             {
-                new InfoService(e.ToString(),InfoService.TypeMess.Error,InfoService.TargetInfo.Telgram);
+                new InfoService(e.ToString(), InfoService.TypeMess.Error, InfoService.TargetInfo.Telgram);
                 return;
-            } 
+            }
 
             string comd = m.Text.Split(Settings.NameBot).First(); ;
 

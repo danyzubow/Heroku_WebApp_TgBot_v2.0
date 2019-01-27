@@ -16,14 +16,14 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
 
             if (Data.GetChat(m) == null)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+               SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
             var tmpGroup2 = Data.GetChat(m);
             if (tmpGroup2.users.Count == 0)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+                SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
@@ -52,7 +52,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
                           " раз(а)";
 
 
-            await Tclient.SendTextMessageAsync(chatID, stats2);
+            SendTextMessageAsync(chatID, stats2);
 
         }
     }

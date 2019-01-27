@@ -3,7 +3,7 @@
 namespace PorterOfChat.Bot.Model
 {
     [Serializable]
-    public class cUser
+    public class cUser:ICloneable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,6 +16,21 @@ namespace PorterOfChat.Bot.Model
         {
             return $"{Name} [{FullName}]";
         }
+
+        public object Clone()
+        {
+           return new cUser()
+           {
+               Id=this.Id,
+               Name=this.Name,
+               CountPidor = this.CountPidor,
+               CountDad = this.CountDad,
+               Id_tg = this.Id_tg,
+               FullName = this.FullName,
+               GenderFemale = this.GenderFemale
+           };
+        }
+
         public cChat cChat { get; set; }
     }
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PorterOfChat;
-using System;
 using System.Diagnostics;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -38,19 +37,17 @@ namespace WebApp_tg_bot2.Controllers
                 string NameBot;
 
                 string Path;
-                string ftpContactDll ;
+                string ftpContactDll;
 #if DEBUG
                 Token = "521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM"; //debug token
                 NameBot = "@PorterOfChatBot";
-                ftpContactDll = $"{Environment.CurrentDirectory}\\wwwroot\\Data\\ftpcontact.dll";
-                Path = Environment.CurrentDirectory + "//"; ;
+
 #else
                 Token = "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts";
                 NameBot = "@seadogs4_bot";
-                Path = Environment.CurrentDirectory + "\\wwwroot\\Data\\";
-                ftpContactDll = $"{Environment.CurrentDirectory}/wwwroot/Data/ftpcontact.dll";
+                
 #endif
-                _porter = new Porter(Token, NameBot, Path, "Saves.xml", ftpContactDll);
+                _porter = new Porter(Token, NameBot);
             }
 
 

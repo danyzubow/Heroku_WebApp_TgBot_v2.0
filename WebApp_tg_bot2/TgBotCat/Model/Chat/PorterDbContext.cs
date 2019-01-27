@@ -13,12 +13,12 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
 
         public DbSet<cChat> chats { get; set; }
         public DbSet<cUser> users { get; set; }
+        private bool Debug;
 
-
-        public PorterDbContext()
+        public PorterDbContext(bool Debug)
         {
             Database.EnsureCreated();
-
+            this.Debug = Debug;
         }
 
         public cChat GetChat(Message e)
@@ -47,6 +47,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
 
         public void SaveAll()
         {
+            if(Debug) return;
             SaveChangesAsync();
         }
 

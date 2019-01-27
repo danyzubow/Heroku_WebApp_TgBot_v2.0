@@ -16,13 +16,13 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
 
             if (Data.GetChat(m) == null)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+                SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
             if (ThisChat.users.Count == 0)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+                SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
@@ -44,8 +44,8 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
                 count++;
             }
 
-            await Tclient.SendTextMessageAsync(chatID, stats, ParseMode.Html);
-            await Tclient.SendTextMessageAsync(chatID, statsDat, ParseMode.Html);
+            SendTextMessageAsync(chatID, stats, ParseMode.Html);
+            SendTextMessageAsync(chatID, statsDat, ParseMode.Html);
 
         }
     }

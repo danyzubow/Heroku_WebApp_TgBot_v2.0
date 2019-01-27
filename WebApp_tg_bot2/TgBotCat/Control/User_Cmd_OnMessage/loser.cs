@@ -16,7 +16,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
         {
             if (Data.GetChat(m) == null)
             {
-                await Tclient.SendTextMessageAsync(ChatID(m), "Список пустий🐷");
+                SendTextMessageAsync(ChatID(m), "Список пустий🐷");
                 return;
             }
 
@@ -24,7 +24,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
             if (ThisChat.LockGroupPidor) return;
             if (ThisChat.users.Count == 0)
             {
-                await Tclient.SendTextMessageAsync(chatID, "Список пустий🐷");
+                SendTextMessageAsync(chatID, "Список пустий🐷");
                 return;
             }
 
@@ -45,9 +45,9 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
             }
             else
             {
-                await Tclient.SendTextMessageAsync(chatID,
+                SendTextMessageAsync(chatID,
                     $"⚠️<i>Сьогодні на вахті</i>⚠️\n <b>{ThisChat.Pidor}</b>", ParseMode.Html);
-                await Tclient.SendTextMessageAsync(chatID, ThisChat.FullPidor + " ⬅️ Link");
+                SendTextMessageAsync(chatID, ThisChat.FullPidor + " ⬅️ Link");
             }
 
 

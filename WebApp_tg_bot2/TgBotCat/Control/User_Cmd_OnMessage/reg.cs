@@ -30,7 +30,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
 
             if (ContainsUserFromDic(ChatIDs(m), m.From.Id))
             {
-                await Tclient.SendTextMessageAsync(m.Chat.Id, "Ти мило вже впустив❤️");
+                SendTextMessageAsync(m.Chat.Id, "Ти мило вже впустив❤️");
             }
             else
             {
@@ -47,7 +47,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
                 };
                 Data.GetChat(m).users.Add(newUser);
 
-                await Tclient.SendTextMessageAsync(chatID,
+                SendTextMessageAsync(chatID,
                     sName + " кидає мило на підлогу🏋️\n /setfemale - Стати подругой👠" +
                     "\n /setmale - Стати пациком💪🏻");
             }

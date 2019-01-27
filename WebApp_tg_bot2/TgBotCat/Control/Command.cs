@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using PorterOfChat.Bot;
+﻿using PorterOfChat.Bot;
 using PorterOfChat.Bot.Model;
 using PorterOfChat.Model;
 using PorterOfChat.Service;
-using Telegram.Bot;
+using System.Linq;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -15,7 +14,7 @@ namespace PorterOfChat.Control
 
         private Message EE_Message;
         private CallbackQuery EE_CallBack;
-        protected TelegramBotClient Tclient;
+        // protected TelegramBotClient Tclient { get; set; }
 
         public Button getButton(params string[] arg_callBackData)
         {
@@ -44,8 +43,8 @@ namespace PorterOfChat.Control
             {
                 if (ThisChat_ == null)
                 {
-                    ThisChat_ = EE_Message != null ? FindGroupID(ChatIDs(EE_Message)) :
-                        FindGroupID(long.Parse(Argument[0]));
+                    ThisChat_ = EE_Message != null ? Data.GetChat(EE_Message) :
+                        Data.GetChat(long.Parse(Argument[0]));
                 }
                 return ThisChat_;
             }
@@ -95,7 +94,6 @@ namespace PorterOfChat.Control
         {
             CleanAll();
             EE_Message = m;
-            Tclient = (TelegramBotClient)sender;
             Execution(EE_Message);
         }
         public void Exec(object sender, CallbackQuery c)
@@ -103,7 +101,6 @@ namespace PorterOfChat.Control
 
             CleanAll();
             EE_CallBack = c;
-            Tclient = (TelegramBotClient)sender;
             Execution(EE_CallBack);
         }
 
@@ -168,11 +165,11 @@ namespace PorterOfChat.Control
                 new InfoService($"Команда{current_Command} функція 'send_Message_html' ---->int.Parse", InfoService.TypeMess.Error);
                 return;
             }
-            await _Client.SendTextMessageAsync(iD, text, ParseMode.Html);
+             SendTextMessageAsync(iD, text, ParseMode.Html);
         }
         protected async void send_Message_html_admin(string text)
         {
-            await _Client.SendTextMessageAsync(Settings.AdminChatId, text, ParseMode.Html);
+            SendTextMessageAsync(Settings.AdminChatId, text, ParseMode.Html);
         }
     }
 

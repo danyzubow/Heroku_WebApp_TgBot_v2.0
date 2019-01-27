@@ -15,7 +15,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
 
             if (Data.GetChat(m) == null)
             {
-                await Tclient.SendTextMessageAsync(chatID, "список пустий😕");
+                SendTextMessageAsync(chatID, "список пустий😕");
             }
             else
             {
@@ -25,11 +25,11 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
                     thisUser = Data.GetChat(m).users.Find(t =>
                         t.Id_tg == UserIDs(m));
                     Data.GetChat(m).users.Remove(thisUser);
-                    await Tclient.SendTextMessageAsync(chatID, sName + " ліває🚮");
+                   SendTextMessageAsync(chatID, sName + " ліває🚮");
                 }
                 else
                 {
-                    await Tclient.SendTextMessageAsync(chatID, sName + " ти не в темі🤔");
+                    SendTextMessageAsync(chatID, sName + " ти не в темі🤔");
                 }
             }
 

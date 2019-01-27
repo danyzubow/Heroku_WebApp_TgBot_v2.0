@@ -3,11 +3,12 @@ using PorterOfChat.Bot.Model;
 using PorterOfChat.Chat;
 using PorterOfChat.Control;
 using System;
-using System.Collections.Generic;
 using System.Threading;
+using PorterOfChat.Service;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 using User = Telegram.Bot.Types.User;
 
 namespace PorterOfChat
@@ -16,10 +17,24 @@ namespace PorterOfChat
     public abstract class BaseControl
     {
         protected static TransporterCMD _transporterCmd = new TransporterCMD();
-        protected static TelegramBotClient _Client; //  "@seadogs4_bot" "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts"
+        protected static TelegramBotClient _TgClient; //  "@seadogs4_bot" "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts"
         protected static IChat Data;
 
+        public static async void SendTextMessageAsync(ChatId Id, string Text, ParseMode Mode=ParseMode.Default, bool disableWebPagePreview = false, bool disableNotification = false,
+           int replyToMessageId = 0, IReplyMarkup replyMarkup = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
 
+            try
+            {
+                await _TgClient.SendTextMessageAsync(Id.Identifier, Text, Mode, disableWebPagePreview, disableNotification,
+                      replyToMessageId, replyMarkup, cancellationToken);
+            }
+            catch(Exception ex)
+            {
+                new InfoService(ex.ToString(), InfoService.TypeMess.Error);
+            }
+
+        }
 
 
         /// <summary>
@@ -72,7 +87,7 @@ namespace PorterOfChat
             if (Data.GetChat(e) == null) return false;
             var gGroup = Data.GetChat(e);
             foreach (var t in gGroup.users)
-                if (t.Id_tg == ChatIDs(e))
+                if (t.Id_tg == e.From.Id)
                     return true;
             return false;
         }
@@ -135,36 +150,36 @@ namespace PorterOfChat
 
         protected static async void FindingPidor(cChat chat, string NewPidor)
         {
-            await _Client.SendTextMessageAsync(chat.Id_tg, "Пошук вахтера по чату 🔍", ParseMode.Html);
+           SendTextMessageAsync(chat.Id_tg, "Пошук вахтера по чату 🔍", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chat.Id_tg, "<i>3 - опитані учасники гейпараду 🗣</i>", ParseMode.Html);
+            SendTextMessageAsync(chat.Id_tg, "<i>3 - опитані учасники гейпараду 🗣</i>", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chat.Id_tg, "<i>2 - твоїх друзів пустили по колу 🎡</i>", ParseMode.Html);
+            SendTextMessageAsync(chat.Id_tg, "<i>2 - твоїх друзів пустили по колу 🎡</i>", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chat.Id_tg, "<i>1 - 🤵🏿 x 10 нігерів виїхали до тебе додому </i>",
+            SendTextMessageAsync(chat.Id_tg, "<i>1 - 🤵🏿 x 10 нігерів виїхали до тебе додому </i>",
                 ParseMode.Html);
             Thread.Sleep(1500);
-            await _Client.SendTextMessageAsync(chat.Id_tg, "<code>BU-DUM-TSS 🎲</code>", ParseMode.Html);
+          SendTextMessageAsync(chat.Id_tg, "<code>BU-DUM-TSS 🎲</code>", ParseMode.Html);
             Thread.Sleep(1500);
-            await _Client.SendTextMessageAsync(chat.Id_tg, $"<b>{NewPidor}</b>", ParseMode.Html);
-            await _Client.SendTextMessageAsync(chat.Id_tg, chat.FullPidor + " ⬅️ Link", ParseMode.Html);
+            SendTextMessageAsync(chat.Id_tg, $"<b>{NewPidor}</b>", ParseMode.Html);
+           SendTextMessageAsync(chat.Id_tg, chat.FullPidor + " ⬅️ Link", ParseMode.Html);
             chat.LockGroupPidor = false;
         }
 
         protected static async void FindingDad(long chatID, cChat tmpGroup, string NewDad)
         {
-            await _Client.SendTextMessageAsync(chatID, "Пошук БАТІ в чаті 🔍");
+            SendTextMessageAsync(chatID, "Пошук БАТІ в чаті 🔍");
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chatID, "<i>3 - проведення виборів в Білорусії 🥔</i>", ParseMode.Html);
+            SendTextMessageAsync(chatID, "<i>3 - проведення виборів в Білорусії 🥔</i>", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chatID, "<i>2 - гортаєм журнал Forbes 💵</i>", ParseMode.Html);
+            SendTextMessageAsync(chatID, "<i>2 - гортаєм журнал Forbes 💵</i>", ParseMode.Html);
             Thread.Sleep(1000);
-            await _Client.SendTextMessageAsync(chatID, "<i>1 - чекаєм фотку в паспорті 🗿</i>", ParseMode.Html);
+            SendTextMessageAsync(chatID, "<i>1 - чекаєм фотку в паспорті 🗿</i>", ParseMode.Html);
             Thread.Sleep(1500);
-            await _Client.SendTextMessageAsync(chatID, "<code>BU-DUM-TSS 🎲</code>", ParseMode.Html);
+            SendTextMessageAsync(chatID, "<code>BU-DUM-TSS 🎲</code>", ParseMode.Html);
             Thread.Sleep(1500);
-            await _Client.SendTextMessageAsync(chatID, $"<b>{NewDad}</b>", ParseMode.Html);
-            await _Client.SendTextMessageAsync(chatID, tmpGroup.FullDad + " ⬅️ Link");
+            SendTextMessageAsync(chatID, $"<b>{NewDad}</b>", ParseMode.Html);
+            SendTextMessageAsync(chatID, tmpGroup.FullDad + " ⬅️ Link");
             tmpGroup.LockGroupDad = false;
         }
 

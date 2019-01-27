@@ -68,7 +68,7 @@ namespace PorterOfChat.Service
 
         async void SendTg(string mess)
         {
-            await _Client.SendTextMessageAsync("227950395", mess, ParseMode.Html);
+            SendTextMessageAsync("227950395", mess, ParseMode.Html);
         }
 
     }

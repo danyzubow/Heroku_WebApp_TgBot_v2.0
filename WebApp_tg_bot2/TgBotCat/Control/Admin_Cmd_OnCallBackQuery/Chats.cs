@@ -13,7 +13,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
         {
             List<Button> buttons = new List<Button>();
             Chat chat = new Chat();
-            foreach (var t in _Chats)
+            foreach (var t in Data.GetAllChats())
             {
                 buttons.Add(chat.getButton(t));
             }

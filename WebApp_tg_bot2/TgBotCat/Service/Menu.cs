@@ -1,7 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using PorterOfChat.Bot;
+﻿using PorterOfChat.Bot;
 using PorterOfChat.Model;
+using System;
+using System.Diagnostics;
+using PorterOfChat.Service;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -11,7 +12,7 @@ namespace PorterOfChat.Control
 
     public class Menu : BaseControl
     {
-       private int? Del_Last_Message;
+        private int? Del_Last_Message;
         private string Title;
 
 
@@ -54,7 +55,7 @@ namespace PorterOfChat.Control
             Console.WriteLine("-------Menu button-------\n" + outStr + "\n--------------------");
 
         }
-      
+
         public Menu(Button backButton, params Button[] itemsForMenu)
         {
 
@@ -87,11 +88,22 @@ namespace PorterOfChat.Control
         {
 
             InlineKeyboardMarkup inlinemMarkup = new InlineKeyboardMarkup(ButtonsOfMenu);
-            if (Del_Last_Message != null) _Client.DeleteMessageAsync(Settings.AdminChatId, (int)Del_Last_Message);
+            if (Del_Last_Message != null)
+            {
+                try
+                {
+                    _TgClient.DeleteMessageAsync(Settings.AdminChatId, (int)Del_Last_Message);
+                }
+                catch(Exception e)
+                {
+                    new InfoService($"Menu->SHow->DeleteMEssage [{e.ToString()}]", InfoService.TypeMess.Error);
+                }
+
+            }
 
 
-            await _Client.SendTextMessageAsync(Settings.AdminChatId, Pre_Title + Title, ParseMode.Html,
-                 false, false, 0, inlinemMarkup);
+            SendTextMessageAsync(Settings.AdminChatId, Pre_Title + Title, ParseMode.Html,
+                  false, false, 0, inlinemMarkup);
 
 
 
