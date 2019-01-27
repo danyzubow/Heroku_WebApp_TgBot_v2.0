@@ -40,7 +40,8 @@ namespace PorterOfChat.Control
             {
                 new adm(),
                 new h(),
-                new data()
+                new data(),
+                new ping()
 
             };
             ComandsAdmin_OnCallbackQuery = new List<Command>()

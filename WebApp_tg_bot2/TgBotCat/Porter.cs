@@ -40,8 +40,9 @@ namespace PorterOfChat
             _TgClient.DeleteWebhookAsync();
             _TgClient.SetWebhookAsync(urlWebHook);
 
-
+#if DEBUG
             new InfoService("[Start Bot]");
+#endif
         }
 
         public void StartReceiving(string token)

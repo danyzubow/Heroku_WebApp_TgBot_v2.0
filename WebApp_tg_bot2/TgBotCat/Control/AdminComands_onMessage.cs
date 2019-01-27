@@ -1,6 +1,8 @@
 ﻿using PorterOfChat.Bot;
 using PorterOfChat.Bot.Model;
 using PorterOfChat.Control.Admin_Cmd_OnCallBackQuery;
+using PorterOfChat.Service;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -43,7 +45,7 @@ namespace PorterOfChat.Control.AdminComands_onMessage
 
             using (FileStream stream = new FileStream(file, FileMode.Open))
             {
-                await _TgClient.SendDocumentAsync(Settings.AdminChatId, new InputOnlineFile(stream,file));
+                await _TgClient.SendDocumentAsync(Settings.AdminChatId, new InputOnlineFile(stream, file));
             }
             System.IO.File.Delete(file);
         }
@@ -57,6 +59,16 @@ namespace PorterOfChat.Control.AdminComands_onMessage
             SendTextMessageAsync(Settings.AdminChatId, outStr);
         }
     }
+    class ping : Command
+    {
+        public override string NameCommand { get; } = "/ping";
+        protected override async void Execution(Message m)
+        {
+
+            new InfoService($"pong [{m.Date.ToString("G")} - > {DateTime.Now.ToString("G")}]");
+        }
+    }
+
 
 }
 
