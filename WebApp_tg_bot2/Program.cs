@@ -75,7 +75,7 @@ namespace WebApp_tg_bot2
             Token = "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts";
             PorterOfChat.Porter.SetWebhook(Token,url_Web_Hook);
 #endif
-            CreateWebHostBuilder(args).Build().Run();
+          //  CreateWebHostBuilder(args).Build().Run();
 
 
 
