@@ -6,6 +6,7 @@ using PorterOfChat.Chat;
 using PorterOfChat.Service;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
@@ -27,7 +28,7 @@ namespace PorterOfChat
             Settings.Path = path;
             Settings.NameBot = @nameBot;
             Settings.DataFileXml_Name = DataFileXml_Name;
-
+            Settings.FtpContactDll = ftpContactDll;
             _Chatdata = new Chat.ChatData(!Settings.DebugMode);
             _Chats = _Chatdata._Chats;
         }
@@ -37,7 +38,9 @@ namespace PorterOfChat
         {
             _Client = new TelegramBotClient(token);
             _Client.DeleteWebhookAsync();
-            _Client.SetWebhookAsync(urlWebHook);
+           _Client.SetWebhookAsync(urlWebHook);
+            
+
             new InfoService("[Start Bot]");
         }
 
@@ -49,62 +52,7 @@ namespace PorterOfChat
             new InfoService("[Start Bot]");
         }
 
-        private static IChat _Chatdata;
-
-        public static async void Initialization(string arg)
-        {
-            if (_Client != null) return;
-            Settings.DataFileXml_Name = "Saves.xml";
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                //_Client = new TelegramBotClient("521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM");
-                // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
-                // _Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
-                // new InfoService($"windows {Environment.CurrentDirectory}");
-
-                // _Client.SetWebhookAsync("        telegrambot228.herokuapp.com/home/update");
-                //Settings.NameBot = "@PorterOfChatBot";
-                //Settings.Path = Environment.CurrentDirectory + "\\wwwroot\\Data\\";
-
-                ////_Release = false;
-                //_Client.DeleteWebhookAsync();
-                //_Client.SetWebhookAsync("https://f698f75b.ngrok.io/home/update");
-                //_Client.OnInlineQuery += Client_OnInlineQuery;
-                //  _Client.OnUpdate += Client_OnUpdate;
-                //
-                Settings.FtpContactDll =
-                    "";
-                //    @"G:\cat-master\cat\Data\ftpcontact";  // @"E:\ЛП\С#\Ftp-teste\ftp-contact\bin\Debug\netcoreapp2.0\ftp-contact";
-
-                //ChatData.ChatData.DownloadSaves();
-            }
-            else
-            {
-
-                //_Client = new TelegramBotClient("568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts");
-                // new InfoService($"linux {Environment.CurrentDirectory}");
-                //Settings.NameBot = "@seadogs4_bot";
-                //Settings.Path = Environment.CurrentDirectory + "//";// + "/wwwroot/"  + "/Data/";
-
-                // _Release = true;
-                System.IO.File.Copy($"{Environment.CurrentDirectory}/wwwroot/Data/ftpcontact.dll", $"{Environment.CurrentDirectory}/ftpcontact.dll");
-                ////ChatData.ChatData.DownloadSaves();
-                _Client.DeleteWebhookAsync();
-                _Client.SetWebhookAsync("https://telegrambot228.herokuapp.com/home/update");
-            }
-
-
-            //_Client.SetWebhookAsync("https://fb28f594.ngrok.io/home/update");
-            //new InfoService($"{Environment.CurrentDirectory}");
-
-
-            new InfoService("[Start Bot]");
-
-            _Client.OnCallbackQuery += Client_OnCallbackQuery;
-            _Client.OnMessage += Client_OnMessage;
-            // _Client.StartReceiving();
-
-        }
+       
 
         private static async void Client_OnCallbackQuery(object sender, CallbackQueryEventArgs c)
         {
@@ -116,8 +64,9 @@ namespace PorterOfChat
             Debug.WriteLine("CallB " + DateTime.Now.ToString("T") + $" -> {c.Data}");
             _transporterCmd.OnCallbackQuery(_Client, c);
             _Chatdata.Save_All();
+          
             return;
-
+         
 
             cChat curenttChat = null;
             cUser cuurentUser = null;
@@ -130,19 +79,19 @@ namespace PorterOfChat
                     break;
                 default:
                     var ParseArg = c.Data.Split("_");
-                    curenttChat = FindGroupID(ParseArg[0]);
+                    curenttChat = FindGroupID(long.Parse(ParseArg[0]));
                     if (ParseArg.Length == 1)
 
                         if (ParseArg.Length == 2)
                         {
-                            cuurentUser = curenttChat.users.Find(t => t.Id_tg == ParseArg[1]);
+                            cuurentUser = curenttChat.users.Find(t => t.Id_tg == long.Parse(ParseArg[1]));
 
                         }
 
                     var outStr = "";
                     if (ParseArg.Length == 3)
                     {
-                        cuurentUser = curenttChat.users.Find(t => t.Id_tg == ParseArg[1]);
+                        cuurentUser = curenttChat.users.Find(t => t.Id_tg ==long.Parse(ParseArg[1]) );
                         switch (ParseArg[2])
                         {
                             case "setpid":
@@ -176,6 +125,7 @@ namespace PorterOfChat
             //{
             //    serializer.Serialize(fs,e.Message);
             //}
+           
         }
 
         public static async void OnMessage(Message m)
@@ -196,7 +146,7 @@ namespace PorterOfChat
 
             #region изменение название чата
 
-            var thisGroup = FindGroupID(m.Chat.Id.ToString());
+            var thisGroup = FindGroupID(m.Chat.Id);
             if (thisGroup != null)
             {
                 thisGroup.UpdateInfo(m.Chat, _Client);
@@ -249,7 +199,7 @@ namespace PorterOfChat
 
             #endregion
 
-
+         
             Console.WriteLine(string.Concat("{ ", m.Date, " }", m.From.FirstName, " ",
                 m.From.LastName, "[", m.From.Username, "]",
                 " => ", m.Text, " triger=", m.Entities != null && m.Text.Contains(Settings.NameBot)));

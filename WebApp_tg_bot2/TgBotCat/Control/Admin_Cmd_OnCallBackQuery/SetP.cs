@@ -21,7 +21,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 
             cUser c_current_user = ThisChat.users.Find(t =>
                 t.FullName == ThisChat.FullPidor);
-            c_current_user.CountPidor = ((int.Parse(c_current_user.CountPidor)) - 1).ToString();
+            c_current_user.CountPidor = c_current_user.CountPidor - 1;
 
             var newPidor = setPidor(ThisChat, thisUser);
            new Task(() => FindingPidor( ThisChat, newPidor)).Start();

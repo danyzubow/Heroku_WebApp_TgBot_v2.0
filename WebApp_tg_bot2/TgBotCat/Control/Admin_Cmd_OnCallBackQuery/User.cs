@@ -11,7 +11,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 
         public Button getButton(cChat chat,cUser user)
         {
-            return new Button(user.FullName, this,chat.Id_tg, user.Id_tg);
+            return new Button(user.FullName, this,chat.Id_tg.ToString(), user.Id_tg.ToString());
         }
 
         protected override void Execution(CallbackQuery c)

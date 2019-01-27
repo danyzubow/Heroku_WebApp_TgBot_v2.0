@@ -5,14 +5,14 @@ using Telegram.Bot;
 namespace PorterOfChat.Bot.Model
 {
     [Serializable]
-    public class cChat
+    public class cChatOld
     {
-        public List<cUser> users { get; set; } 
+        public  List<cUser> users { get; set; } 
         [NonSerialized] public bool LockGroupPidor = false;
         [NonSerialized] public bool LockGroupDad = false;
         public int Id { get; set; }
         public string Name { get; set; }
-        public long Id_tg { get; set; }
+        public string Id_tg { get; set; }
         public string DatePidor { get; set; }
         public string Pidor { get; set; }
         public string FullPidor { get; set; }
@@ -23,12 +23,12 @@ namespace PorterOfChat.Bot.Model
 
         public int CountMembers { get; set; }
 
-        public cChat(List<cUser> userArg)
+        public cChatOld(List<cUser> userArg)
         {
             users = userArg;
         }
 
-        public cChat()
+        public cChatOld()
         {
             users=new List<cUser>();
         }
@@ -36,7 +36,7 @@ namespace PorterOfChat.Bot.Model
         public bool UpdateInfo(Telegram.Bot.Types.Chat nowChat, TelegramBotClient client)
         {
             var needSave = false;
-            var count = client.GetChatMembersCountAsync(Id_tg).Result;
+            var count = client.GetChatMembersCountAsync(long.Parse(Id_tg)).Result;
             if (count != CountMembers)
             {
                 CountMembers = count;
@@ -50,11 +50,6 @@ namespace PorterOfChat.Bot.Model
             }
 
             return needSave;
-        }
-
-        public override string ToString()
-        {
-            return $"{Name} [{Id}]";
         }
     }
 

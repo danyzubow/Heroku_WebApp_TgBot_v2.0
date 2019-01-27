@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
-using PorterOfChat.Bot.Model;
+﻿using PorterOfChat.Bot.Model;
+using System.Collections.Generic;
+using Telegram.Bot.Types;
 
 namespace PorterOfChat.Chat
 {
     public interface IChat
     {
-        void LoadAllChats();
-        void Save_All();
-        bool _Release { get; set; }
-        List<cChat> _Chats { get; }
+        cChat GetChat(Message e);
+        cChat GetChat(long Id);
+        cUser GetUser_FromMess(Message e);
+        cUser GetUser(int Id, Message e);
+        void AddChat(cChat chat);
+        void Remove(cChat chat);
+        List<cChat> GetAllChats();
+        void SaveAll();
     }
 }

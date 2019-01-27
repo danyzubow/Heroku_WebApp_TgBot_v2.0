@@ -1,11 +1,11 @@
 ﻿using PorterOfChat.Bot;
 using PorterOfChat.Bot.Model;
+using PorterOfChat.Chat;
 using PorterOfChat.Control;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using Telegram.Bot;
-using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using User = Telegram.Bot.Types.User;
@@ -17,44 +17,51 @@ namespace PorterOfChat
     {
         protected static TransporterCMD _transporterCmd = new TransporterCMD();
         protected static TelegramBotClient _Client; //  "@seadogs4_bot" "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts"
-        protected static List<cChat> _Chats;
-        protected static cChat FindGroupID(string id) //
-        {
-            foreach (var el in _Chats)
-                if (el.Id_tg == id)
-                    return el;
-            return null;
-        }
-        protected static string ChatIDs(Message e) => e.Chat.Id.ToString();
-        protected static string UserIDs(Message e) => e.From.Id.ToString();
+        protected static IChat Data;
+
+
+
+
+        /// <summary>
+
+        //protected static cChat FindGroupID(long id) //
+        //{
+        //    foreach (var el in _Chats)
+        //        if (el.Id_tg == id)
+        //            return el;
+        //    return null;
+
+        //}
+        protected static long ChatIDs(Message e) => e.Chat.Id;
+        protected static long UserIDs(Message e) => e.From.Id;
         protected static long ChatID(Message e) => e.Chat.Id;
-        protected static long UserID(MessageEventArgs e) => e.Message.From.Id;
-        protected static Bot.Model.cChat FindGroupID(Message e) //
+        //protected static Bot.Model.cChat FindGroupID(Message e) //
+        //{
+
+        //    foreach (var el in _Chats)
+        //        if (el.Id_tg == ChatID(e))
+        //            return el;
+        //    return null;
+        //}
+
+
+
+        protected static cUser FindUserFromDic(long chatID, int num) //
         {
-            foreach (var el in _Chats)
-                if (el.Id_tg == ChatID(e).ToString())
-                    return el;
-            return null;
+            return Data.GetChat(chatID).users[num];
         }
-
-
-
-        protected static cUser FindUserFromDic(string chatID, int num) //
+        protected static cUser FindUser(long chatID, long id) //
         {
-            return FindGroupID(chatID).users[num];
-        }
-        protected static cUser FindUser(string chatID, string id) //
-        {
-            return FindGroupID(chatID).users.Find(t => t.Id_tg == id);
+            return Data.GetChat(chatID).users.Find(t => t.Id_tg == id);
         }
         protected static cUser FindUserFromDic(Message e, int num) //
         {
-            return FindGroupID(ChatIDs(e)).users[num];
+            return Data.GetChat(ChatIDs(e)).users[num];
         }
-        protected static bool ContainsUserFromDic(string chatId, string Id) //
+        protected static bool ContainsUserFromDic(long chatId, long Id) //
         {
-            if (FindGroupID(chatId) == null) return false;
-            var gGroup = FindGroupID(chatId);
+            if (Data.GetChat(chatId) == null) return false;
+            var gGroup = Data.GetChat(chatId);
             foreach (var t in gGroup.users)
                 if (t.Id_tg == Id)
                     return true;
@@ -62,28 +69,24 @@ namespace PorterOfChat
         }
         protected static bool ContainsUserFromDic(Message e) //
         {
-            if (FindGroupID(e) == null) return false;
-            var gGroup = FindGroupID(e);
+            if (Data.GetChat(e) == null) return false;
+            var gGroup = Data.GetChat(e);
             foreach (var t in gGroup.users)
                 if (t.Id_tg == ChatIDs(e))
                     return true;
             return false;
         }
 
-        protected static bool ContainsGroupFromDic(string chatId) //
-        {
-            return FindGroupID(chatId) != null;
-        }
         protected static string setPidor(cChat tmpGroup, cUser User)
         {
             var random = new Random();
             try
             {
-                User.CountPidor = (int.Parse(User.CountPidor) + 1).ToString();
+                User.CountPidor = User.CountPidor + 1;
             }
             catch
             {
-                User.CountPidor = "1";
+                User.CountPidor = 1;
             }
 
             tmpGroup.DatePidor = DateTime.Now.AddHours(3).ToString("d");
@@ -112,11 +115,11 @@ namespace PorterOfChat
             var random = new Random();
             try
             {
-                User.CountDad = (int.Parse(User.CountDad) + 1).ToString();
+                User.CountDad = User.CountDad + 1;
             }
             catch
             {
-                User.CountDad = "1";
+                User.CountDad = 1;
             }
 
             tmpGroup.DateDad = DateTime.Now.AddHours(3).ToString("d");
@@ -164,5 +167,7 @@ namespace PorterOfChat
             await _Client.SendTextMessageAsync(chatID, tmpGroup.FullDad + " ⬅️ Link");
             tmpGroup.LockGroupDad = false;
         }
+
+
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PorterOfChat.Control;
-using PorterOfChat.Bot.Model;
+﻿using PorterOfChat.Bot.Model;
 using PorterOfChat.Service;
 using Telegram.Bot.Types;
 
@@ -17,8 +12,8 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
         protected override void Execution(CallbackQuery c)
         {
             int count = 1;
-          
-            if (ThisChat.FullDad == ""|| ThisChat.FullDad==null)
+
+            if (ThisChat.FullDad == "" || ThisChat.FullDad == null)
             {
                 new InfoService($"В чате '{ThisChat.Name}' еще нет 'бати' ");
                 return;
@@ -26,8 +21,8 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 
             cUser c_current_user = ThisChat.users.Find(t =>
                 t.FullName == ThisChat.FullDad);
-            c_current_user.CountDad = ((int.Parse(c_current_user.CountDad)) - 1).ToString();
-  
+            c_current_user.CountDad = c_current_user.CountDad - 1;
+
             setBatya(ThisChat, thisUser);
             string outStr =
                 $"<b>Complete.</b> Чат=> <b>* ) '{ThisChat.Name}'</b> [{ThisChat.Id_tg}] - " +
@@ -39,7 +34,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
                 c.Message.MessageId,
                 outStr
             );
-          
+
         }
     }
 }

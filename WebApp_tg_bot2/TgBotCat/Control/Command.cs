@@ -45,7 +45,7 @@ namespace PorterOfChat.Control
                 if (ThisChat_ == null)
                 {
                     ThisChat_ = EE_Message != null ? FindGroupID(ChatIDs(EE_Message)) :
-                        FindGroupID(Argument[0]);
+                        FindGroupID(long.Parse(Argument[0]));
                 }
                 return ThisChat_;
             }
@@ -60,7 +60,7 @@ namespace PorterOfChat.Control
             {
                 if (ThisUser_ == null)
                 {
-                    ThisUser_ = EE_Message != null ? null : FindUser(Argument[0], Argument[1]);
+                    ThisUser_ = EE_Message != null ? null : FindUser(long.Parse(Argument[0]), long.Parse(Argument[1]));
                 }
                 return ThisUser_;
             }
