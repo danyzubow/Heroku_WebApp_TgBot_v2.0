@@ -58,7 +58,8 @@ namespace WebApp_tg_bot2
             #region WebHook_debug
 
             Token = "521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM"; //debug token
-            url_Web_Hook = "https://7165f6f6.ngrok.io/home/update";
+            url_Web_Hook = "https://ae1d13cd.ngrok.io/home/update";
+
             PorterOfChat.Porter.SetWebhook(Token, url_Web_Hook);
             #endregion
 
@@ -75,7 +76,7 @@ namespace WebApp_tg_bot2
             Token = "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts";
             PorterOfChat.Porter.SetWebhook(Token,url_Web_Hook);
 #endif
-          //  CreateWebHostBuilder(args).Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
 
 
 

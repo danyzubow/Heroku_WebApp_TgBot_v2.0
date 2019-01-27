@@ -30,6 +30,7 @@ namespace WebApp_tg_bot2.Controllers
         //  [HttpPost]
         public OkResult update([FromBody]Update update)
         {
+          //  return Ok();
             if (_porter == null)
             {
 
