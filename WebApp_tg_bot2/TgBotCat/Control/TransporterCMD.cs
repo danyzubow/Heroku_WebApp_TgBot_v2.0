@@ -58,15 +58,16 @@ namespace PorterOfChat.Control
 
         public void OnMessage(TelegramBotClient sender, Message m)
         {
-            try
-            {
-                if (!m.Text.Contains(Settings.NameBot) && (m.Chat.Id != Settings.AdminChatId)) return;
-            }
-            catch (Exception e)
-            {
-                new InfoService(e.ToString(), InfoService.TypeMess.Error, InfoService.TargetInfo.Telgram);
-                return;
-            }
+            //trynu
+            //{
+            if(m.Text==null) return;
+            if (!m.Text.Contains(Settings.NameBot) && (m.Chat.Id != Settings.AdminChatId)) return;
+            //}
+            //catch (Exception e)
+            //{
+            //    new InfoService(e.ToString(), InfoService.TypeMess.Error, InfoService.TargetInfo.Telgram);
+            //    return;
+            //}
 
             string comd = m.Text.Split(Settings.NameBot).First(); ;
 

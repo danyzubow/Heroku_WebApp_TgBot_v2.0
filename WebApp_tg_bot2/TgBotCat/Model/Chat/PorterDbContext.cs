@@ -19,6 +19,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
         {
             Database.EnsureCreated();
             this.Debug = Debug;
+            chats.Include(t=>t.users).Load();
         }
 
         public cChat GetChat(Message e)
@@ -38,7 +39,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
 
         public List<cChat> GetAllChats()
         {
-            return chats.Include(t => t.users).ToList();
+            return chats.Local.ToList();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -81,7 +82,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
             cChat cChat = chats.Local.FirstOrDefault(t => t.Id_tg == Id);
             if (cChat == null)
             {
-                cChat = chats.Include(t => t.users).FirstOrDefault(t => t.Id_tg == Id);
+                cChat = chats.Local.FirstOrDefault(t => t.Id_tg == Id);
             }
             return cChat;
         }
