@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using PorterOfChat;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
@@ -28,7 +29,12 @@ namespace WebApp_tg_bot2.Controllers
                 NameBot = "@seadogs4_bot";
                 
 #endif
-                _porter = new Porter(Token, NameBot);
+                var connectionString = Environment.GetEnvironmentVariable("connectionString");
+                if (connectionString == null)
+                {
+                    throw new Exception("connectionString is empty");
+                }
+                _porter = new Porter(Token, NameBot,connectionString);
             }
         }
         static PorterOfChat.Porter _porter;

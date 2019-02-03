@@ -18,7 +18,7 @@ namespace PorterOfChat
     public class Porter : BaseControl
     {
 
-        public Porter(string token, string @nameBot)
+        public Porter(string token, string @nameBot,string connectionString)
 
         {
 #if DEBUG
@@ -28,6 +28,7 @@ namespace PorterOfChat
 #endif
             _TgClient = new TelegramBotClient(token);
             //Settings.Path = path;
+            Settings.ConnectionString = connectionString;
             Settings.NameBot = @nameBot;
             //  Settings.DataFileXml_Name = DataFileXml_Name;
             // Settings.FtpContactDll = ftpContactDll;

@@ -49,16 +49,13 @@ namespace WebApp_tg_bot2
             //}
 
 
-            var connectionString = Environment.GetEnvironmentVariable("connectionString");
+            
          
             string url_Web_Hook;
             string Token;
-            if (connectionString == null)
-            {
-                throw new Exception("connectionString is empty");
-            }
+          
 
-            PorterOfChat.Bot.Settings.ConnectionString = connectionString;
+            Environment.GetEnvironmentVariable("connectionString");
 #if DEBUG
 
             #region WebHook_debug
