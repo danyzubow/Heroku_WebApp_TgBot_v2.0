@@ -10,7 +10,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
     public class leave : Command
     {
         public override string NameCommand { get; } = "/leave";
-        protected override async void Execution(Message m)
+        protected override  void Execution(Message m)
         {
 
             if (Data.GetChat(m) == null)

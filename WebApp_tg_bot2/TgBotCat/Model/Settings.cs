@@ -4,7 +4,7 @@ namespace PorterOfChat.Bot
 {
 
 
-    internal static class Settings
+    public static class Settings
     {
         public static int AdminChatId = 227950395;
         public static string NameBot; //  "@seadogs4_bot"
@@ -21,7 +21,17 @@ namespace PorterOfChat.Bot
         /// Директория для Data. Н-п.: c:\data\ !!!
         /// </summary>
         public static string Path = "";
+         static string _ConnectionString ;
 
+        public static string ConnectionString
+        {
+            get
+            {
+                if (_ConnectionString == "") throw new Exception("_ConnectionString is empty");
+                else return _ConnectionString;
+            }
+            set { _ConnectionString = value; }
+        }
         public static bool DebugMode = false;
         private static string DataFileXml_Name_;
         /// <summary>

@@ -10,7 +10,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
     public class setmale : Command
     {
         public override string NameCommand { get; } = "/setmale";
-        protected override async void Execution(Message m)
+        protected override  void Execution(Message m)
         {
             if (!ContainsUserFromDic(m))
             {

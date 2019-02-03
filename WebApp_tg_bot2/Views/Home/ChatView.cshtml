@@ -12,7 +12,7 @@
     <div class="container">
         <img src="~/images/img_avatar2.png" alt="Avatar" style="width:100%;">
         <p>@t.Text</p>
-        <span class="time-right">@t.FullName (id:@t.id_tg)  [@t.Date] @if(t.chat != null) {<text>from @t.chat.Name (id:@t.chat.Id_tg)</text>}</span>
+        <span class="time-right">@t.FullName (id:@t.id_tg)  [@t.Date] @if(t.chat != null) {<text>from '@t.chat.Name' (id:@t.chat.Id_tg)</text>}</span>
     </div>
 }
 

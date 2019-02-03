@@ -12,7 +12,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
     {
         public override string NameCommand { get; } = "/pidor";
 
-        protected override async void Execution(Message m)
+        protected override  void Execution(Message m)
         {
             if (Data.GetChat(m) == null)
             {

@@ -11,7 +11,7 @@ namespace WebApp_tg_bot2.TgBotCat.Control.User_Cmd_OnMessage
     public class reg : Command
     {
         public override string NameCommand { get; } = "/reg";
-        protected override async void Execution(Message m)
+        protected override  void Execution(Message m)
         {
             if (ThisChat == null) //(!ContainsGroupFromDic(e.Message.cChat.Id_tg.ToString()))
             {

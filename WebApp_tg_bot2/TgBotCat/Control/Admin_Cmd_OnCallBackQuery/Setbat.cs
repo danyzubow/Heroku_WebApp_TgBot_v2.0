@@ -11,7 +11,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 
         protected override void Execution(CallbackQuery c)
         {
-            int count = 1;
+           
 
             if (ThisChat.FullDad == "" || ThisChat.FullDad == null)
             {

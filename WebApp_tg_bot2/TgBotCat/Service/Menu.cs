@@ -92,7 +92,7 @@ namespace PorterOfChat.Control
             {
                 try
                 {
-                    _TgClient.DeleteMessageAsync(Settings.AdminChatId, (int)Del_Last_Message);
+                  await  _TgClient.DeleteMessageAsync(Settings.AdminChatId, (int)Del_Last_Message);
                 }
                 catch(Exception e)
                 {

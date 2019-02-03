@@ -62,61 +62,13 @@ namespace PorterOfChat
             OnCallbackQuery(c.CallbackQuery);
         }
 
-        public static async void OnCallbackQuery(CallbackQuery c)
+        public static  void OnCallbackQuery(CallbackQuery c)
         {
             Debug.WriteLine("CallB " + DateTime.Now.ToString("T") + $" -> {c.Data}");
             _transporterCmd.OnCallbackQuery(_TgClient, c);
             Data.SaveAll();
 
-            return;
-
-
-            cChat curenttChat = null;
-            cUser cuurentUser = null;
-            switch (c.Data)
-            {
-                case "allGroup":
-                    //_Client.DeleteMessageAsync(Settings.AdminChatId, e.CallbackQuery.Message.MessageId);
-                    //SendMenu<cChat>(_Chats.ToArray(), ShowButtonBack: true); //
-                    //   new Menu(_Chats.ToArray()).Show();
-                    break;
-                default:
-                    var ParseArg = c.Data.Split("_");
-                    curenttChat = Data.GetChat(long.Parse(ParseArg[0]));
-                    if (ParseArg.Length == 1)
-
-                        if (ParseArg.Length == 2)
-                        {
-                            cuurentUser = curenttChat.users.Find(t => t.Id_tg == long.Parse(ParseArg[1]));
-
-                        }
-
-                    var outStr = "";
-                    if (ParseArg.Length == 3)
-                    {
-                        cuurentUser = curenttChat.users.Find(t => t.Id_tg == long.Parse(ParseArg[1]));
-                        switch (ParseArg[2])
-                        {
-                            case "setpid":
-
-                                setPidor(curenttChat, cuurentUser);
-                                outStr = $"Complete Group=>  '{curenttChat.Name}'  \nпід={curenttChat.FullPidor};" +
-                                         $"\nбат={curenttChat.FullDad};\nпідД={curenttChat.DatePidor};\nбатД={curenttChat.DateDad}";
-
-                                BaseControl.SendTextMessageAsync(Settings.AdminChatId, outStr, ParseMode.Default);
-                                break;
-                            case "Setbat":
-                                setBatya(curenttChat, cuurentUser);
-                                outStr =
-                                    $"Complete. Group=>   '{curenttChat.Name}'  \nпід={curenttChat.FullPidor};" +
-                                    $"\nбат={curenttChat.FullDad};\nпідД={curenttChat.DatePidor};\nбатД={curenttChat.DateDad}";
-
-                                BaseControl.SendTextMessageAsync(Settings.AdminChatId, outStr, ParseMode.Default);
-                                break;
-                        }
-                    }
-                    break;
-            }
+            
         }
 
         private static async void Client_OnMessage(object sender, MessageEventArgs e)

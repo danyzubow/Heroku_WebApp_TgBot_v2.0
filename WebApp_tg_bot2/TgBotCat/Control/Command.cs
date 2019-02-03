@@ -153,7 +153,7 @@ namespace PorterOfChat.Control
             }
         }
 
-        protected async void send_Message_html(string text, string id)
+        protected  void send_Message_html(string text, string id)
         {
             int iD = 0;
             try
@@ -167,7 +167,7 @@ namespace PorterOfChat.Control
             }
              SendTextMessageAsync(iD, text, ParseMode.Html);
         }
-        protected async void send_Message_html_admin(string text)
+        protected  void send_Message_html_admin(string text)
         {
             SendTextMessageAsync(Settings.AdminChatId, text, ParseMode.Html);
         }

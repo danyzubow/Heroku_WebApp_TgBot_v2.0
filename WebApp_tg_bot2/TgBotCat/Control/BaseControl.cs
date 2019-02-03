@@ -148,7 +148,7 @@ namespace PorterOfChat
             return DadToday;
         }
 
-        protected static async void FindingPidor(cChat chat, string NewPidor)
+        protected static  void FindingPidor(cChat chat, string NewPidor)
         {
            SendTextMessageAsync(chat.Id_tg, "Пошук вахтера по чату 🔍", ParseMode.Html);
             Thread.Sleep(1000);
@@ -166,7 +166,7 @@ namespace PorterOfChat
             chat.LockGroupPidor = false;
         }
 
-        protected static async void FindingDad(long chatID, cChat tmpGroup, string NewDad)
+        protected static  void FindingDad(long chatID, cChat tmpGroup, string NewDad)
         {
             SendTextMessageAsync(chatID, "Пошук БАТІ в чаті 🔍");
             Thread.Sleep(1000);

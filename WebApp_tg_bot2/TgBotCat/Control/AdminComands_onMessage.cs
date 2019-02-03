@@ -14,7 +14,7 @@ namespace PorterOfChat.Control.AdminComands_onMessage
     class adm : Command
     {
         public override string NameCommand { get; } = "/adm";
-        protected override async void Execution(Message m)
+        protected override void Execution(Message m)
         {
 
             new Chats().Exec(null, (CallbackQuery)null);
@@ -53,16 +53,16 @@ namespace PorterOfChat.Control.AdminComands_onMessage
     class h : Command
     {
         public override string NameCommand { get; } = "/h";
-        protected override async void Execution(Message m)
+        protected override  void Execution(Message m)
         {
             string outStr = "Command:\n/data";
-            SendTextMessageAsync(Settings.AdminChatId, outStr);
+             SendTextMessageAsync(Settings.AdminChatId, outStr);
         }
     }
     class ping : Command
     {
         public override string NameCommand { get; } = "/ping";
-        protected override async void Execution(Message m)
+        protected override  void Execution(Message m)
         {
 
             new InfoService($"pong [{m.Date.ToString("G")} - > {DateTime.Now.ToString("G")}]");

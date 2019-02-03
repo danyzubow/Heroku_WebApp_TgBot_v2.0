@@ -4,6 +4,7 @@ using PorterOfChat.Chat;
 using PorterOfChat.Service;
 using System.Collections.Generic;
 using System.Linq;
+using PorterOfChat.Bot;
 using Telegram.Bot.Types;
 
 namespace WebApp_tg_bot2.TgBotCat.Model.Chat
@@ -52,7 +53,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=TestTelgram.mssql.somee.com;Database=TestTelgram;user=seadogs4_SQLLogin_1;password=cfcqfp1xdp;");
+            optionsBuilder.UseSqlServer(Settings.ConnectionString);
         }
 
         public void SaveAll()
@@ -73,7 +74,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
             }
         }
 
-        public new void Remove(cChat chat)
+        public  void Remove(cChat chat)
         {
             cChat chatLocal = GetChat(chat.Id_tg);
             if (chatLocal == null)

@@ -7,12 +7,9 @@ namespace WebApp_tg_bot2
     public class Program
     {
 
-
-        private static bool d;
         public static void Main(string[] args)
         {
-            string q = Console.ReadLine();
-            Console.WriteLine(q);
+            
             //XmlSerializer serial = new XmlSerializer(typeof(List<cChat>));
             //string PathXml = "E:\\ЛП\\С#\\_HEROKU\\WebApp_tg_bot2\\WebApp_tg_bot2\\Saves.xml";
             //#region File_to_db
@@ -51,10 +48,16 @@ namespace WebApp_tg_bot2
             //    chatdb.SaveChanges();
             //}
 
+           
 
             string url_Web_Hook;
-
             string Token;
+            if (args.Length == 0)
+            {
+                throw new Exception("args is empty");
+            }
+
+            PorterOfChat.Bot.Settings.ConnectionString = args[0];
 #if DEBUG
 
             #region WebHook_debug

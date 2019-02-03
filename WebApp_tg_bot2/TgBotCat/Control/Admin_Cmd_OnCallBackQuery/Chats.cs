@@ -22,7 +22,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
 
         }
 
-        protected override async void Execution(CallbackQuery c)
+        protected override  void Execution(CallbackQuery c)
         {
 
             if (c == null)

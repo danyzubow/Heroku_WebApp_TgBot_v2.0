@@ -17,8 +17,8 @@ namespace WebApp_tg_bot2.Controllers
                 string Token;
                 string NameBot;
 
-                string Path;
-                string ftpContactDll;
+                //string Path;
+                //string ftpContactDll;
 #if DEBUG
                 Token = "521500060:AAH4Cj8XkwG0BpyDPy_a-hFN5LtFC5IC0sM"; //debug token
                 NameBot = "@PorterOfChatBot";

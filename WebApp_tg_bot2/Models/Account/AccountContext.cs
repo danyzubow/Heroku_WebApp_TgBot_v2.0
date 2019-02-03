@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PorterOfChat.Bot;
 
 namespace WebApp_tg_bot2.Models.Account
 {
@@ -17,7 +18,7 @@ namespace WebApp_tg_bot2.Models.Account
         public AccountContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=TestTelgram.mssql.somee.com;Database=TestTelgram;user=seadogs4_SQLLogin_1;password=cfcqfp1xdp;");
+            optionsBuilder.UseSqlServer(Settings.ConnectionString);
         }
     }
 }

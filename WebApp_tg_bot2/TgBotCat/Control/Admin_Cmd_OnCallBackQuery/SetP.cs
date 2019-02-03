@@ -10,7 +10,7 @@ namespace PorterOfChat.Control.Admin_Cmd_OnCallBackQuery
     {
         public override string NameCommand { get; } = "SetP";
 
-        protected override async void Execution(CallbackQuery c)
+        protected override  void Execution(CallbackQuery c)
         {
 
          if (ThisChat.FullPidor == ""|| ThisChat.FullPidor == null)

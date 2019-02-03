@@ -66,7 +66,7 @@ namespace PorterOfChat.Service
             }
         }
 
-        async void SendTg(string mess)
+         void SendTg(string mess)
         {
             SendTextMessageAsync("227950395", mess, ParseMode.Html);
         }
