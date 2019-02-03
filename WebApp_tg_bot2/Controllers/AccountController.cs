@@ -47,7 +47,7 @@ namespace WebApp_tg_bot2.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Некорректные лошиг и(или( пароль");
+                    ModelState.AddModelError("", "Некорректные логин и(ли) пароль");
                 }
 
             }
