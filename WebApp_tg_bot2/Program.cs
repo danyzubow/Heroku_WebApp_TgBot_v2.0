@@ -48,8 +48,9 @@ namespace WebApp_tg_bot2
             //    chatdb.SaveChanges();
             //}
 
-           
 
+            var t = Environment.GetEnvironmentVariable("qwe");
+            Console.WriteLine(t);
             string url_Web_Hook;
             string Token;
             if (args.Length == 0)
