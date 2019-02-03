@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Threading;
 using System.Xml.Serialization;
 using Telegram.Bot.Types;
-
+using WebApp_tg_bot2.TgBotCat.Model;
 
 namespace PorterOfChat.Chat
 {
@@ -190,6 +190,16 @@ namespace PorterOfChat.Chat
                 _Chats.Remove(chatL);
             }
 
+        }
+
+        public void AddMessage(MessageLog msg)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<MessageLog> GetMessageLogs()
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -18,7 +18,7 @@ namespace PorterOfChat
     {
         protected static TransporterCMD _transporterCmd = new TransporterCMD();
         protected static TelegramBotClient _TgClient; //  "@seadogs4_bot" "568147661:AAHEsAzNZAbW-t_eJlOviuWHPBb8J81EHts"
-        protected static IChat Data;
+        public static IChat Data;
 
         public static async void SendTextMessageAsync(ChatId Id, string Text, ParseMode Mode=ParseMode.Default, bool disableWebPagePreview = false, bool disableNotification = false,
            int replyToMessageId = 0, IReplyMarkup replyMarkup = null, CancellationToken cancellationToken = default(CancellationToken))

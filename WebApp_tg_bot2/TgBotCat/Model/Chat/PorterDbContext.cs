@@ -13,15 +13,24 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
 
         public DbSet<cChat> chats { get; set; }
         public DbSet<cUser> users { get; set; }
+        public DbSet<MessageLog> MessagesLogs { get; set; }
         private bool Debug;
-
+        public PorterDbContext(DbContextOptions<PorterDbContext> options)
+            : base(options)
+        {
+        }
         public PorterDbContext(bool Debug)
         {
             Database.EnsureCreated();
             this.Debug = Debug;
-            chats.Include(t=>t.users).Load();
+            chats.Include(t => t.users).Load();
         }
-
+        public PorterDbContext()
+        {
+            Database.EnsureCreated();
+            //this.Debug = Debug;
+            //chats.Include(t => t.users).Load();
+        }
         public cChat GetChat(Message e)
         {
             return GetChat(e.Chat.Id);
@@ -48,7 +57,7 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
 
         public void SaveAll()
         {
-            if(Debug) return;
+            if (Debug) return;
             SaveChangesAsync();
         }
 
@@ -87,6 +96,15 @@ namespace WebApp_tg_bot2.TgBotCat.Model.Chat
             return cChat;
         }
 
+        public void AddMessage(MessageLog msg)
+        {
+            MessagesLogs.Add(msg);
+        }
 
+        public List<MessageLog> GetMessageLogs()
+        {
+            MessagesLogs.Include(t=>t.chat).Include(t=>t.user).Load();
+            return MessagesLogs.ToList();
+        }
     }
 }

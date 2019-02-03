@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PorterOfChat;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using WebApp_tg_bot2.Models;
@@ -8,29 +9,8 @@ namespace WebApp_tg_bot2.Controllers
 {
     public class HomeController : Controller
     {
-        static PorterOfChat.Porter _porter;
-        public IActionResult Index()
+        public HomeController()
         {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-        //  [HttpPost]
-        public OkResult update([FromBody]Update update)
-        {
-          //  return Ok();
             if (_porter == null)
             {
 
@@ -50,7 +30,22 @@ namespace WebApp_tg_bot2.Controllers
 #endif
                 _porter = new Porter(Token, NameBot);
             }
+        }
+        static PorterOfChat.Porter _porter;
+        public IActionResult Index()
+        {
+            return RedirectToAction("ChatView", "Home");
+        }
+        [Authorize]
+        public IActionResult ChatView()
+        {
 
+            return View(BaseControl.Data.GetMessageLogs().ToArray());
+        }
+
+        public OkResult update([FromBody]Update update)
+        {
+            //  return Ok();
 
             switch (update.Type)
             {
@@ -67,10 +62,7 @@ namespace WebApp_tg_bot2.Controllers
             }
             return Ok();
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

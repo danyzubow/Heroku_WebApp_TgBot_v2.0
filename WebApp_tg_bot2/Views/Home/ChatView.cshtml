@@ -1,0 +1,36 @@
+﻿@using WebApp_tg_bot2.TgBotCat.Model
+@model IEnumerable<WebApp_tg_bot2.TgBotCat.Model.MessageLog>
+@{
+    ViewData["Title"] = "ChatView";
+    Layout = "";
+}
+
+<h2>ChatView</h2>
+<link rel="stylesheet" href="~/css/chat.css" />
+@foreach (var t in Model)
+{
+    <div class="container">
+        <img src="~/images/img_avatar2.png" alt="Avatar" style="width:100%;">
+        <p>@t.Text</p>
+        <span class="time-right">@t.FullName (id:@t.id_tg)  [@t.Date] @if(t.chat != null) {<text>from @t.chat.Name (id:@t.chat.Id_tg)</text>}</span>
+    </div>
+}
+
+
+@*<div class="container darker">
+        <img src="~/images/img_avatar2.png" alt="Avatar" class="right" style="width:100%;">
+        <p>Hey! I'm fine. Thanks for asking!</p>
+        <span class="time-left">11:01</span>
+    </div>
+
+    <div class="container">
+        <img src="~/images/img_avatar2.png" alt="Avatar" style="width:100%;">
+        <p>Sweet! So, what do you wanna do today?</p>
+        <span class="time-right">11:02</span>
+    </div>
+
+    <div class="container darker">
+        <img src="~/images/img_avatar2.png" alt="Avatar" style="width:100%;">
+        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+        <span class="time-left">123123 FHSGF JSDFK SJLFJ NSJ11:05</span>
+    </div>*@

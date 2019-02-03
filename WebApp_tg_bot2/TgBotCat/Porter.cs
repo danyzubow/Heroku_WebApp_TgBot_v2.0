@@ -5,10 +5,12 @@ using PorterOfChat.Bot.Model;
 using PorterOfChat.Service;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using WebApp_tg_bot2.TgBotCat.Model;
 using WebApp_tg_bot2.TgBotCat.Model.Chat;
 
 namespace PorterOfChat
@@ -30,7 +32,7 @@ namespace PorterOfChat
             //  Settings.DataFileXml_Name = DataFileXml_Name;
             // Settings.FtpContactDll = ftpContactDll;
             Data = new PorterDbContext(Settings.DebugMode);
-
+          
         }
 
 
@@ -131,16 +133,24 @@ namespace PorterOfChat
 
         public static async void OnMessage(Message m)
         {
+            #region LogMessages
+            cChat chat = Data.GetChat(m);
+            Data.AddMessage(new MessageLog(chat,m));
+
+            #endregion
+
+
+
             if (m.Chat.Title == null && m.Chat.Id != Settings.AdminChatId)
             {
                 BaseControl.SendTextMessageAsync(m.Chat.Id,
-                     $"Скоріше за все ти Тарас-Підарас, а якщо ти {m.From.FirstName} то ти тож підор, зміни ім'я на {m.From.FirstName}-підор xD");
+                     $"С кем-то в два раза веселее, чем в одиночку xD");
                 return;
             }
             #region NewExecute
 
             _transporterCmd.OnMessage(_TgClient, m);
-            Data.SaveAll();
+         //   Data.SaveAll();
 
 
             #endregion
@@ -151,9 +161,9 @@ namespace PorterOfChat
             if (thisGroup != null)
             {
                 thisGroup.UpdateInfo(m.Chat, _TgClient);
-                Data.SaveAll();
+                
             }
-
+            Data.SaveAll();
             #endregion
 
             #region Reg All
