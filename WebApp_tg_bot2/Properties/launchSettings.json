@@ -20,8 +20,8 @@
       "commandLineArgs": "Server=TestTelgram.mssql.somee.com;Database=TestTelgram;user=seadogs4_SQLLogin_1;password=cfcqfp1xdp;",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "qwe": "test"
+        "connectionString": "Server=TestTelgram.mssql.somee.com;Database=TestTelgram;user=seadogs4_SQLLogin_1;password=cfcqfp1xdp;",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5000"
     }

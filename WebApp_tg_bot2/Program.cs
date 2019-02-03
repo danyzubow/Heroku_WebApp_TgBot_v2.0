@@ -49,16 +49,16 @@ namespace WebApp_tg_bot2
             //}
 
 
-            var t = Environment.GetEnvironmentVariable("qwe");
-            Console.WriteLine(t);
+            var connectionString = Environment.GetEnvironmentVariable("connectionString");
+         
             string url_Web_Hook;
             string Token;
-            if (args.Length == 0)
+            if (connectionString == null)
             {
-                throw new Exception("args is empty");
+                throw new Exception("connectionString is empty");
             }
 
-            PorterOfChat.Bot.Settings.ConnectionString = args[0];
+            PorterOfChat.Bot.Settings.ConnectionString = connectionString;
 #if DEBUG
 
             #region WebHook_debug
