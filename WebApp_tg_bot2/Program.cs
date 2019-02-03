@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace WebApp_tg_bot2
@@ -10,7 +11,8 @@ namespace WebApp_tg_bot2
         private static bool d;
         public static void Main(string[] args)
         {
-
+            string q = Console.ReadLine();
+            Console.WriteLine(q);
             //XmlSerializer serial = new XmlSerializer(typeof(List<cChat>));
             //string PathXml = "E:\\ЛП\\С#\\_HEROKU\\WebApp_tg_bot2\\WebApp_tg_bot2\\Saves.xml";
             //#region File_to_db
