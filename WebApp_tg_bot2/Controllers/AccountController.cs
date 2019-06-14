@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using PorterOfChat.Service;
 using WebApp_tg_bot2.Models.Account;
 
 namespace WebApp_tg_bot2.Controllers
@@ -17,6 +19,20 @@ namespace WebApp_tg_bot2.Controllers
         public AccountController()
         {
             db = new AccountContext();
+        }
+        [HttpGet]
+        public string GetUrl()
+        {
+            try
+            {
+                return Environment.GetEnvironmentVariable("urlApp");
+            }
+            catch (Exception e)
+            {
+                new InfoService("GetUrl", InfoService.TypeMess.Error, InfoService.TargetInfo.Telgram);
+                return "";
+            }
+            
         }
         [Authorize]
         public IActionResult Index2()
